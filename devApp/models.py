@@ -14,3 +14,10 @@ class test(models.Model):
     content = models.TextField()
     address = models.TextField()
     nickname = models.TextField()
+
+
+class Person(models.Model):
+    name = models.TextField()
+    phone = models.TextField()
+    addr = models.TextField()
+    email = models.TextField()
