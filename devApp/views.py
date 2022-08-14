@@ -47,16 +47,13 @@ def test_read(request):
 
 
 def json_add(request):
-    # body = json.loads(request.body.decode("utf-8"))
-    print(request.body)
-    # print(body)
-    # name = body['name']
-    # phone = body['phone']
-    # addr = body['addr']
-    # email = body['email']
-    # Person.objects.create(name=name, phone=phone, addr=addr, email=email)
-    # return HttpResponse("<h1>"+name+" "+phone+" "+addr+" "+email+"</h1>")
-    return HttpResponse(request.body)
+    body = json.loads(request.body.decode("utf-8"))
+    name = body['name']
+    phone = body['phone']
+    addr = body['addr']
+    email = body['email']
+    Person.objects.create(name=name, phone=phone, addr=addr, email=email)
+    return HttpResponse("<h1>"+name+" "+phone+" "+addr+" "+email+"</h1>")
 
 
 def json_test(request):
