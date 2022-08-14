@@ -29,7 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
         ".ap-northeast-2.compute.amazonaws.com",
         ".gpdevapp.com",
-        "127.0.0.1"
+        "127.0.0.1",
+        "3.39.139.14"
         ]
 
 
