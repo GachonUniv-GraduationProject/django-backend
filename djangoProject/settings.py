@@ -30,7 +30,8 @@ ALLOWED_HOSTS = [
         ".ap-northeast-2.compute.amazonaws.com",
         ".gpdevapp.com",
         "127.0.0.1",
-        "3.39.139.14"
+        "3.39.139.14",
+        "localhost"
         ]
 
 
@@ -44,7 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "devApp",
-    "rest_framework"
+    "rest_framework",
+    "login",
+    "core"
 ]
 
 MIDDLEWARE = [
