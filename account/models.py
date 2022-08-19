@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+class tech_stack(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False)
+
+
 class UserManager(BaseUserManager):
     # 일반 user 생성
     def create_user(self, email, nickname, name, password=None):
@@ -38,6 +42,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
     nickname = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
     name = models.CharField(default='', max_length=100, null=False, blank=False)
+    tech_stacks = models.ManyToManyField(tech_stack, default=None)
 
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)
