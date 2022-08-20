@@ -1,5 +1,5 @@
 from .serializers import UserSerializer
-from .models import User
+from .models import User, UserManager
 from rest_framework import generics
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib import auth
@@ -23,10 +23,15 @@ def logintest(request):
     data = json.loads(request.body)
     print(data['email'])
     print(auth.get_user(request))
+    user = User.objects.get(nickname=data['nickname'])
+    print(user)
+    auth.login(request, user)
+    print(auth.get_user(request))
     return HttpResponse("check log")
 
 
 def signuptest(request):
     data = json.loads(request.body)
     print(data['nickname'])
+    user = User.objects.create_user(data['email'],data['nickname'],data['name'])
     return HttpResponse("check log")
