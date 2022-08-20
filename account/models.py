@@ -47,6 +47,7 @@ class User(AbstractBaseUser):
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     # 헬퍼 클래스 사용
     objects = UserManager()
@@ -58,3 +59,16 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.nickname
+
+    def info(self):
+        return str(self.id)+" "+str(self.email)+" "+str(self.nickname)
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
