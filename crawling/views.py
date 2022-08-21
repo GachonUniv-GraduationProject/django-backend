@@ -1,32 +1,30 @@
 from django.http import JsonResponse
-from django.shortcuts import render, HttpResponse
-import random
+from django.shortcuts import HttpResponse
 import json
+from .models import data, keyword
 
 
 # Create your views here.
 def recruit_json(request):
-    data = json.loads(request.body)
-    jobs = data.get('jobs')
-    print(jobs.keys())
-    # print(jobs['count'])
-    # print(jobs['start'])
-    # print(jobs['total'])
-    job_list = jobs['job']
-    print(job_list[0].keys())
-    # print(len(job_list))
-    # for job in job_list:
-    #     print(job['company'])
-    #     print(job['position'])
-    #     print(job['keyword'])
-    #     print(job['expiration-timestamp'])
-    print(job_list[0]['company']['detail']['name'])
-    print(job_list[0]['position']['title'])
-    print(job_list[0]['position']['industry']['name'])
-    print(job_list[0]['position']['job-mid-code']['name'])
-    print(job_list[0]['position']['job-code']['name'])
-    print(job_list[0]['position']['experience-level']['name'])
-    print(job_list[0]['position']['required-education-level']['name'])
-    print(job_list[0]['keyword'])
-    print(job_list[0]['expiration-timestamp'])
+    crawling_data = json.loads(request.body)
+    jobs = crawling_data.get('jobPosts')
+    print(jobs[0])
+    print(type(jobs[0]))
+    print(jobs[0].keys())
+    temp_data = data
+    temp_data.company_name = jobs[0]['companyName']
+    temp_data.field = jobs[0]['field']
+    temp_data.career_min = jobs[0]['careerMin']
+    temp_data.position = jobs[0]['position']
+    print(temp_data.company_name)
+    print(temp_data.field)
+    print(temp_data.career_min)
+    print(temp_data.position)
+    crawling_keyword = jobs[0]['keywordList']
+    print(crawling_keyword)
+    for temp_k in crawling_keyword:
+        key = keyword
+        key.name = temp_k['keyword']
+        print(key.name)
+
     return HttpResponse("<h1>crawling page</h1>")
