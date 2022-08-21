@@ -33,5 +33,8 @@ def logintest(request):
 def signuptest(request):
     data = json.loads(request.body)
     print(data['nickname'])
-    user = User.objects.create_user(data['email'],data['nickname'],data['name'])
+    user = User.objects.create_user(data['email'],data['nickname'],data['name'],data['password'])
+    print(user.password)
+    get_user = User.objects.get(nickname=data['nickname'])
+    print(get_user.password)
     return HttpResponse("check log")
