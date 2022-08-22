@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib import auth
 import json
 
+
 class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
