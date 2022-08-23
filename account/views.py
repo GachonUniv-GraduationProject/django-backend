@@ -34,8 +34,11 @@ def login_test(request):
 def signup_test(request):
     data = json.loads(request.body)
     print(data['nickname'])
-    user = User.objects.create_user(data['email'],data['nickname'],data['name'],data['password'])
-    print(user.password)
+    if len(User.objects.filter(email=data['email'])) == 0:
+        user = User.objects.create_user(data['email'],data['nickname'],data['name'],data['password'])
+        print(user.password)
+    else:
+        print("duplicate user")
     get_user = User.objects.get(nickname=data['nickname'])
     print(get_user.password)
     return HttpResponse("check log")
