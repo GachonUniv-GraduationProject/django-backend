@@ -3,10 +3,10 @@ from django.db import models
 
 class JavaScript(models.Model):
     skill_name = models.CharField(max_length=50, null=False)
-    child_skills = models.ForeignKey('self', on_delete=models.CASCADE)
+    base = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='child')
 
 
 class js_url(models.Model):
     link = models.CharField(max_length=255, null=False)
-    skill = models.ForeignKey(JavaScript, on_delete=models.CASCADE)
+    skill = models.ForeignKey(JavaScript, on_delete=models.CASCADE, related_name='base_skill')
     link_name = models.CharField(max_length=255, null=False)
