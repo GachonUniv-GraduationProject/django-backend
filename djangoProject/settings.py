@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "account",
     "core",
-    "crawling"
+    "crawling",
+    "roadmap"
 ]
 
 MIDDLEWARE = [

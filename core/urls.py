@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.index),
     path('crawling/', include("crawling.urls")),
     path('user/', include('account.urls')),
-
+    path('roadmap/',include('roadmap.urls'))
 
 
 
