@@ -8,5 +8,5 @@ class JavaScript(models.Model):
 
 class js_url(models.Model):
     link = models.CharField(max_length=255, null=False)
-    skill = models.ForeignKey(JavaScript, on_delete=models.CASCADE, related_name='base_skill')
+    skill = models.ForeignKey(JavaScript, on_delete=models.CASCADE, related_name='url')
     link_name = models.CharField(max_length=255, null=False)

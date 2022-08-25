@@ -13,8 +13,7 @@ def add_roadmap(request):
             base_skill = JavaScript.objects.create(skill_name=skill['baseSkill'])
         else:
             base_skill = JavaScript.objects.get(skill_name=skill['baseSkill'])
-        skill = JavaScript.objects.create(skill_name=skill['skill'])
-        base_skill.child.add(skill)
+        skill = JavaScript.objects.create(skill_name=skill['skill'], base_id=base_skill.pk)
 
     for url in data['URL']:
         create_url = js_url.objects.create(link=url['URL'], link_name=url['title'], skill_id=JavaScript.objects.get(skill_name=url['skill']).pk)
