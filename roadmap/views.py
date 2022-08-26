@@ -4,7 +4,7 @@ from .models import JavaScript,js_url
 
 
 # Create your views here.
-def add_roadmap(request):
+def add_roadmap_test(request):
     data = json.loads(request.body)
 #    print(data['JavaScript'])
 #    print(data['URL'])
@@ -17,4 +17,10 @@ def add_roadmap(request):
 
     for url in data['URL']:
         create_url = js_url.objects.create(link=url['URL'], link_name=url['title'], skill_id=JavaScript.objects.get(skill_name=url['skill']).pk)
+    return HttpResponse("<h1>check log</h1>")
+
+
+def add_roadmap(request):
+    data = json.loads(request.body)
+
     return HttpResponse("<h1>check log</h1>")
