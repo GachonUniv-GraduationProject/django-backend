@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 import json
-from .models import JavaScript,js_url
+from .models import JavaScript,js_url, skills, url
 
 
 # Create your views here.
@@ -22,5 +22,15 @@ def add_roadmap_test(request):
 
 def add_roadmap(request):
     data = json.loads(request.body)
-
+    for key in data.keys():
+        print(key)
+        for skill in data[key]:
+            if skill['index'] == "-1":
+                if len(skills.objects.filter(name=skill['skill'])) == 0:
+                    base_skill = skills.objects.create(name=skill['skill'])
+                else:
+                    base_skill = skills.objects.get(skill_name=skill['baseSkill'])
+                skill = skills.objects.create(name=skill['skill'], base_id=base_skill.pk, field=key)
+            else:
+                create_url = url.objects.create(link=skill[''])
     return HttpResponse("<h1>check log</h1>")
