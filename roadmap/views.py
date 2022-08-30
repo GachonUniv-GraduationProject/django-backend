@@ -33,7 +33,7 @@ def add_roadmap(request):
                         else:
                             create_url = url.objects.create(link=skill['URL'], link_name="default", skill_id=target.pk)
                 else:
-                    if key == "URL":
+                    if "URL" in key:
                         target_skill = skills.objects.filter(name=skill['skill'], field=skill['field'])
                     else:
                         target_skill = skills.objects.filter(name=skill['skill'], field=key)
