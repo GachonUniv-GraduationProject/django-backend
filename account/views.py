@@ -60,4 +60,16 @@ def add_tech_stack(request):
     return HttpResponse("check log")
 
 
-# def user_check(request):
+def user_check(request):
+    print(auth.get_user(request))
+    cur_user = auth.get_user(request)
+    return HttpResponse("<h1>cur user : "+cur_user.nickname+"</h1>")
+
+
+def logout(request):
+    past_user = auth.get_user(request).nickname
+    auth.logout(request)
+    cur_user = auth.get_user(request)
+    print(cur_user)
+
+    return HttpResponse("<h1>"+past_user+" log out</h1>")
