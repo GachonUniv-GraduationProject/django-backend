@@ -58,3 +58,6 @@ def add_tech_stack(request):
         cur_user = User.objects.get(pk=auth.get_user(request).pk)
         cur_user.tech_stacks.add(stack_objects_create)
     return HttpResponse("check log")
+
+
+# def user_check(request):
