@@ -7,7 +7,11 @@ from .models import data, keyword
 # Create your views here.
 def recruit_json(request):
     print(type(request.body))
-    json.loads(request.body.decode('utf-8'))
+    data = request.body.decode('utf-8')
+
+    print(data)
+    print(type(data))
+    # json.loads(request.body.decode('utf-8'))
     # crawling_data = json.loads(request.body)
     # jobs = crawling_data.get('jobPosts')
     # print(len(jobs))
@@ -24,7 +28,7 @@ def recruit_json(request):
     #                 keyword_objects_create = keyword.objects.get(name=temp_key['keyword'])
     #             temp_data.keywords.add(keyword_objects_create)
 
-    return HttpResponse("<h1>check log</h1>")
+    return HttpResponse(type(request.body)+request.body)
 
 
 def crawling_to_json(crawling):
