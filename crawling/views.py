@@ -28,7 +28,7 @@ def recruit_json(request):
     #                 keyword_objects_create = keyword.objects.get(name=temp_key['keyword'])
     #             temp_data.keywords.add(keyword_objects_create)
 
-    return HttpResponse(type(request.body)+request.body.decode('utf-8'))
+    return HttpResponse(request.body.decode('utf-8'))
 
 
 def crawling_to_json(crawling):
