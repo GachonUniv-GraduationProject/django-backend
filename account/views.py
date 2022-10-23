@@ -4,6 +4,7 @@ from rest_framework import generics
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib import auth
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 
@@ -21,6 +22,7 @@ class LoginView(View):
         cur_user = auth.get_user(request)
         return HttpResponse("<h1>cur user : " + cur_user.nickname + "</h1>")
 
+    @csrf_exempt
     def post(self, request):
         data = json.loads(request.body)
         print(data['email'])
@@ -41,6 +43,7 @@ class LoginView(View):
 
 
 class SignupView(View):
+    @csrf_exempt
     def post(self, request):
         data = json.loads(request.body)
         print(data['nickname'])
@@ -61,6 +64,7 @@ class TechView(View):
         cur_user = User.objects.get(pk=auth.get_user(request).pk)
         return HttpResponse(cur_user.tech_stacks)
 
+    @csrf_exempt
     def post(self, request):
         data = json.loads(request.body)
         print(auth.get_user(request))
