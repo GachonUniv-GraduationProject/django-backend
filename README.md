@@ -1,2 +1,2 @@
 # djangoProject
-django study project
+django backend for graduation project

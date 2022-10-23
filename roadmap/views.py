@@ -7,9 +7,6 @@ from .models import skills, url
 
 
 def add_roadmap(request):
-    data = request.body.decode('utf-8')
-    print(data)
-    print(type(data))
     data = json.loads(request.body.decode('utf-8'))
     haebin = {"Frontend","Backend","Android","Blockchain"}
     for key in data.keys():
