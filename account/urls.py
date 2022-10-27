@@ -15,8 +15,8 @@ urlpatterns =[
     # path('addtech/', views.add_tech_stack),
     # path('', views.user_check),
     # path('logout/', views.logout)
-    path('',views.IndexView.as_view(), name="index"),
-    path('login/',views.LoginView.as_view(), name="index"),
-    path('signup/', views.SignupView.as_view(), name="index"),
-    path('tech/', views.TechView.as_view(), name="index")
+    path('', views.IndexView.as_view(), name="index"),
+    path('login/',views.LoginView.as_view(), name="login"),
+    path('signup/', views.SignupView.as_view(), name="signup"),
+    path('tech/', views.TechView.as_view(), name="tech")
  ]
