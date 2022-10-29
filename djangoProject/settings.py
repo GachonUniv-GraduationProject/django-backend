@@ -44,7 +44,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # DRF
     "rest_framework",
+    "rest_framework.authtoken",
+
+    # rest_auth
+    "rest_auth",
+    "knox",
+
+    # my apps
     "account",
     "core",
     "crawling",
@@ -138,4 +147,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-CSRF_TRUSTED_ORIGINS = ['https://gpdevapp.com','http://*.com', 'https://*.com']
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("knox.auth.TokenAuthentication",),
+}
+

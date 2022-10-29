@@ -16,7 +16,7 @@ urlpatterns =[
     # path('', views.user_check),
     # path('logout/', views.logout)
     path('', views.IndexView.as_view(), name="index"),
-    path('login/',views.LoginView.as_view(), name="login"),
-    path('signup/', views.SignupView.as_view(), name="signup"),
+    path('login/',views.login, name="login"),
+    path('signup/', views.signup, name="signup"),
     path('tech/', views.TechView.as_view(), name="tech")
  ]
