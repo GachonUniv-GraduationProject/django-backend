@@ -1,6 +1,6 @@
-from django.urls import path, include
 from . import views
-from rest_framework import urls
+from django.urls import path, include
+from .views import HelloAPI, RegistrationAPI, LoginAPI, UserAPI
 
 urlpatterns =[
     # 회원가입, 로그인을 관리
@@ -15,8 +15,8 @@ urlpatterns =[
     # path('addtech/', views.add_tech_stack),
     # path('', views.user_check),
     # path('logout/', views.logout)
-    path('', views.IndexView.as_view(), name="index"),
-    path('login/',views.login, name="login"),
-    path('signup/', views.signup, name="signup"),
-    path('tech/', views.TechView.as_view(), name="tech")
+    path('', UserAPI.as_view()),
+    path('login/',LoginAPI.as_view()),
+    path('signup/', RegistrationAPI.as_view()),
+    # path('tech/', views.TechView.as_view(), name="tech")
  ]
