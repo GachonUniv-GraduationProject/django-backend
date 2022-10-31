@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path, include
-from .views import HelloAPI, RegistrationAPI, LoginAPI, UserAPI
+from .views import HelloAPI, RegistrationAPI, LoginAPI, UserAPI, ProfileUpdateAPI
 
 urlpatterns =[
     # 회원가입, 로그인을 관리
@@ -18,5 +18,6 @@ urlpatterns =[
     path('', UserAPI.as_view()),
     path('login/',LoginAPI.as_view()),
     path('signup/', RegistrationAPI.as_view()),
+    path("profile/<int:user_pk>/update/", ProfileUpdateAPI.as_view())
     # path('tech/', views.TechView.as_view(), name="tech")
  ]
