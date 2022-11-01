@@ -4,19 +4,6 @@ from django.contrib.auth import authenticate
 from .models import Profile
 
 
-# class UserSerializer(serializers.ModelSerializer):
-#     def create(self, validated_data):
-#         user = User.objects.create_user(
-#             email=validated_data['email'],
-#             nickname=validated_data['nickname'],
-#             name=validated_data['name'],
-#             password=validated_data['password']
-#         )
-#         return user
-#
-#     class Meta:
-#         model = User
-#         fields = ['nickname', 'email', 'name', 'password']
 
 # 회원가입
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -54,7 +41,12 @@ class LoginUserSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.Serializer):
     class Meta:
         model = Profile
-        fields = {"nickname", "phone"}
+        fields = {"nickname", "phone", "email"}
 
     def update(self, instance, validated_data):
-        profile = Profile.objects.update()
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.nickname = validated_data.get('nickname', instance.nickname)
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+
+        return instance
