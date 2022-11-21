@@ -2,9 +2,26 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse
 import json
 from .models import data, keyword
+from .serializers import dataSerializer, keywordSerializer
+from rest_framework import viewsets
 
 
 # Create your views here.
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = data.objects.all()
+    serializer_class = dataSerializer
+
+
+class KeywordViewSet(viewsets.ModelViewSet):
+    queryset = keyword.objects.all()
+    serializer_class = keywordSerializer
+
+
+
+def test(request):
+    return HttpResponse("<h1>mapped</h1>")
+
+
 def recruit_json(request):
     crawling_data = json.loads(request.body)
     jobs = crawling_data.get('jobPosts')
