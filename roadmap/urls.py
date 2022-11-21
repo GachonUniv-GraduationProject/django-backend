@@ -33,7 +33,9 @@ urlpatterns = [
     path('skill',skill_list),
     path('skill/<int:pk>',skill_detail),
     path('url',url_list),
-    path('url/<int:pk>',url_detail)
+    path('url/<int:pk>',url_detail),
+    path('tree',views.get_fields),
+    path('tree/<field>',views.get_dict)
     # path('add/', views.add_roadmap)
 
 ]
