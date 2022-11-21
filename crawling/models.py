@@ -20,4 +20,4 @@ class data(models.Model):
     keywords = models.ManyToManyField(keyword)
 
     def __str__(self):
-        return self.company_name+" "+self.position
+        return self.company_name + " " + self.position

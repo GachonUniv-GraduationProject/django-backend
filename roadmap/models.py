@@ -3,7 +3,7 @@ from django.db import models
 
 class skills(models.Model):
     name = models.CharField(max_length=100, null=False)
-    base = models.ForeignKey('self',on_delete=models.CASCADE, null=True, related_name='child')
+    base = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='child')
     field = models.CharField(max_length=50, null=False)
 
 

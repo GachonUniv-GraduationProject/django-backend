@@ -1,10 +1,20 @@
 from django.shortcuts import render,HttpResponse
 import json
 from .models import skills, url
+from .serializers import skillSerializer,urlSerializer
+from rest_framework import viewsets
+
 
 
 # Create your views here.
+class SkillViewSet(viewsets.ModelViewSet):
+    queryset = skills.objects.all()
+    serializer_class = skillSerializer
 
+
+class UrlViewSet(viewsets.ModelViewSet):
+    queryset = url.objects.all()
+    serializer_class = urlSerializer
 
 def add_roadmap(request):
     data = json.loads(request.body.decode('utf-8'))
