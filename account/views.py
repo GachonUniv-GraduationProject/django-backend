@@ -65,8 +65,11 @@ class ProfileUpdateAPI(generics.UpdateAPIView):
     serializer_class = ProfileSerializer
 
     def put(self, request, *args, **kwargs):
+        print(2)
         serializer = self.get_serializer(data = request.data)
+        print(3)
         serializer.is_valid(raise_exception=True)
+
         profile = serializer.save()
         return Response(
             {
