@@ -1,19 +1,12 @@
-from rest_framework import viewsets, permissions, generics, status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from knox.models import AuthToken
-from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
+from rest_framework import permissions, generics, status
+from rest_framework.response import Response
+
 from .models import Profile
+from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
 
 
 # Create your views here.
-@api_view(["GET"])
-def HelloAPI(request):
-
-    return Response("hello world!")
-
-
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
 
@@ -64,17 +57,19 @@ class ProfileUpdateAPI(generics.UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-    def put(self, request, *args, **kwargs):
-        print(2)
-        serializer = self.get_serializer(data = request.data)
-        print(3)
-        serializer.is_valid(raise_exception=True)
-
-        profile = serializer.save()
-        return Response(
-            {
-                "profile": ProfileSerializer(
-                    profile, context=self.get_serializer_context()
-                ).data,
-            }
-        )
+    # def put(self, request, *args, **kwargs):
+    #     print(2)
+    #     serializer = self.get_serializer(data = request.data)
+    #     print(serializer.initial_data)
+    #     print(self.request.user)
+    #     print(3)
+    #     serializer.is_valid(raise_exception=True)
+    #
+    #     profile = serializer.save()
+    #     return Response(
+    #         {
+    #             "profile": ProfileSerializer(
+    #                 profile, context=self.get_serializer_context()
+    #             ).data,
+    #         }
+    #     )
