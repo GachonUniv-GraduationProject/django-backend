@@ -22,7 +22,10 @@ def test(request):
 
 
 def trend(request):
-
+    keywords = keyword.objects.all().order_by("-count")
+    for k in keywords:
+        print(k)
+    # TODO: 키워드별로 딕셔너리를 만들어서 구분해야할듯, 안드로이드랑 트렌드 분야 확정 지어야할듯
     return JsonResponse({"trend": "test"})
 
 

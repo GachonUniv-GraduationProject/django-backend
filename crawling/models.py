@@ -8,7 +8,7 @@ class keyword(models.Model):
     count = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.name+" "+str(self.count)
 
 
 class data(models.Model):

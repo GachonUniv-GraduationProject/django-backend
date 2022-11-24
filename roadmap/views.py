@@ -19,11 +19,10 @@ class UrlViewSet(viewsets.ModelViewSet):
 
 def get_fields(request):
     query = skills.objects.values_list('field', flat=True)
-    result = {"fields":[]}
+    result = {"fields": []}
     for q in query:
         if q not in result["fields"]:
             result["fields"].append(q)
-
 
     return JsonResponse(result)
 
