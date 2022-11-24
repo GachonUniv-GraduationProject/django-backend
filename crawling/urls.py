@@ -32,6 +32,8 @@ urlpatterns = [
     path('data', data_list),
     path('data/<int:pk>', data_detail),
     path('keyword', keyword_list),
-    path('keyword/<int:pk>', keywrod_detail)
+    path('keyword/<int:pk>', keywrod_detail),
+    path('trend', views.trend),
+    path('trend/update', views.keyword_update)
 
 ]
