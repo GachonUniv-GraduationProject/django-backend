@@ -46,7 +46,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         print(user)
         instance.phone = validated_data.get('phone', instance.phone)
-        instance.nickname = validated_data.get('nickname', instance.nickname)
+        instance.display_name = validated_data.get('display_name', instance.display_name)
         instance.save()
 
         return instance

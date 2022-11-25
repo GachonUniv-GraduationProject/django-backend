@@ -10,7 +10,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_pk = models.IntegerField(blank=True)
-    nickname = models.CharField(max_length=200, blank=True)
+    display_name = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=200, blank=True)
 
 
