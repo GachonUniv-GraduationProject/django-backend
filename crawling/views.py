@@ -4,6 +4,25 @@ import json
 from .models import data, keyword
 from .serializers import dataSerializer, keywordSerializer
 from rest_framework import viewsets
+# 취업공고의 position을 보고, 거기서부터 필드명을 추출해야할듯?
+field_keywords = {"Frontend": ["front-end", "frontend", "프론트엔드"],
+                  "Backend": ["back-end", "backend", "devops", "백엔드"],
+                  "Android": ["안드로이드"],
+                  "Blockchain": [],
+                  "AI": [],
+                  "Fundamental": [],
+                  "Data Science": [],
+                  "Machine Learning": [],
+                  "Deep Learning": [],
+                  "Data Engineer": [],
+                  "BigData Engineer": [],
+                  "Game Client": [],
+                  "Game Server": [],
+                  "JavaScript": [],
+                  "Java": [],
+                  "Python": [],
+                  "React": [],
+                  "Node.js": []}
 
 
 # Create your views here.
@@ -22,10 +41,12 @@ def test(request):
 
 
 def trend(request):
-    keywords = keyword.objects.all().order_by("-count")
-    for k in keywords:
-        print(k)
-    # TODO: 키워드별로 딕셔너리를 만들어서 구분해야할듯, 안드로이드랑 트렌드 분야 확정 지어야할듯
+    crawling_datas = data.objects.all()
+    for crawling_data in crawling_datas:
+        print(crawling_data.position)
+        for key in crawling_data.keywords.all():
+            print(key)
+        print()
     return JsonResponse({"trend": "test"})
 
 
@@ -40,7 +61,7 @@ def keyword_update(request):
             if key.name in keyword_dict:
                 keyword_dict[key.name] += 1
             else:
-                keyword_dict[key.name] = 0
+                keyword_dict[key.name] = 1
 
     for key in keyword_dict.keys():
         objects_get = keyword.objects.get(name=key)

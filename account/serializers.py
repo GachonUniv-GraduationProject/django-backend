@@ -47,6 +47,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         print(user)
         instance.phone = validated_data.get('phone', instance.phone)
         instance.display_name = validated_data.get('display_name', instance.display_name)
+        instance.is_individual = validated_data.get('is_individual', instance.is_individual)
         instance.save()
 
         return instance

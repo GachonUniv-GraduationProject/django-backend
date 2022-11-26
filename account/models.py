@@ -12,6 +12,7 @@ class Profile(models.Model):
     user_pk = models.IntegerField(blank=True)
     display_name = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=200, blank=True)
+    is_individual = models.BooleanField(default=True)
 
 
 @receiver(post_save, sender=User)
