@@ -19,11 +19,13 @@ keyword_list = KeywordViewSet.as_view({
     'post': 'create'
 })
 
-keywrod_detail = KeywordViewSet.as_view({
+keyword_detail = KeywordViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'delete': 'destroy'
 })
+
+
 
 urlpatterns = [
     # get으로 크롤링 데이터 가져올 수 있게, 파라미터로 특정 크롤링 결과만 가져올 수 잇게하자
@@ -32,8 +34,11 @@ urlpatterns = [
     path('data', data_list),
     path('data/<int:pk>', data_detail),
     path('keyword', keyword_list),
-    path('keyword/<int:pk>', keywrod_detail),
-    path('trend', views.trend),
-    path('trend/update', views.keyword_update)
+    path('keyword/<int:pk>', keyword_detail),
+    path('trend', views.get_field),
+    path('trend/<field>', views.get_trend),
+    path('trend_update', views.trend_update),
+    path('keyword/update', views.keyword_update),
+    path('update', views.recruit_json)
 
 ]

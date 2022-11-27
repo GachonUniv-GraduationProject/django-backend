@@ -21,3 +21,8 @@ class data(models.Model):
 
     def __str__(self):
         return self.company_name + " " + self.position
+
+
+class trend(models.Model):
+    field_name = models.CharField(max_length=100, null=False, blank=False)
+    keywords = models.ManyToManyField(keyword)
