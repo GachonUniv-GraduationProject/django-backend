@@ -1,6 +1,7 @@
 from knox.models import AuthToken
 from rest_framework import permissions, generics, status
 from rest_framework.response import Response
+import time
 
 from .models import Profile
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
@@ -17,6 +18,7 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        time.sleep(2)
         return Response(
             {
                 "user": UserSerializer(
