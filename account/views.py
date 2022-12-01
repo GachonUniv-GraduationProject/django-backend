@@ -1,7 +1,8 @@
 from knox.models import AuthToken
 from rest_framework import permissions, generics, status
 from rest_framework.response import Response
-import time
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 from .models import Profile
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
@@ -18,7 +19,6 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        time.sleep(2)
         return Response(
             {
                 "user": UserSerializer(
@@ -54,24 +54,30 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
 
 
-class ProfileUpdateAPI(generics.UpdateAPIView):
-    lookup_field = "user_pk"
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+# class ProfileUpdateAPI(generics.UpdateAPIView):
+#     lookup_field = "user_pk"
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
 
-    # def put(self, request, *args, **kwargs):
-    #     print(2)
-    #     serializer = self.get_serializer(data = request.data)
-    #     print(serializer.initial_data)
-    #     print(self.request.user)
-    #     print(3)
-    #     serializer.is_valid(raise_exception=True)
-    #
-    #     profile = serializer.save()
-    #     return Response(
-    #         {
-    #             "profile": ProfileSerializer(
-    #                 profile, context=self.get_serializer_context()
-    #             ).data,
-    #         }
-    #     )
+
+class ProfileDetailAPIView(APIView):
+    def get_object(self, user_pk):
+        return get_object_or_404(Profile, pk=user_pk-2)
+
+    def get(self, request, user_pk):
+        profile = self.get_object(user_pk)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
+
+    def put(self, request, user_pk):
+        profile = self.get_object(user_pk)
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, user_pk):
+        profile = self.get_object(user_pk)
+        profile.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

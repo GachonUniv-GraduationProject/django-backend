@@ -15,6 +15,12 @@ class Profile(models.Model):
     is_individual = models.BooleanField(default=True)
 
 
+class Roadmap(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='roadmap')
+    field_name = models.CharField(max_length=200, blank=True)
+    progress = models.CharField(max_length=200, blank=True)
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

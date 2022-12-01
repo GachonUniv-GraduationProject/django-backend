@@ -43,8 +43,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def update(self, instance, validated_data):
-        user = self.context['request'].user
-        print(user)
+        # user = self.context['request'].user
+        # print(user)
         instance.phone = validated_data.get('phone', instance.phone)
         instance.display_name = validated_data.get('display_name', instance.display_name)
         instance.is_individual = validated_data.get('is_individual', instance.is_individual)
