@@ -4,29 +4,31 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
+from django.contrib.auth.models import User
 from .models import Profile
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
 
 
 # Create your views here.
-class RegistrationAPI(generics.GenericAPIView):
-    serializer_class = CreateUserSerializer
-
-    def post(self, request, *args, **kwargs):
+class RegistrationAPIView(APIView):
+    def post(self, request):
+        is_individual = request.GET.get('is_individual', True)
+        print(request.GET.get('is_individual', False))
         if len(request.data["username"]) < 6 or len(request.data["password"]) < 4:
             body = {"message": "short field"}
             return Response(body, status=status.HTTP_400_BAD_REQUEST)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response(
-            {
-                "user": UserSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
-                "token": AuthToken.objects.create(user)[1],
-            }
-        )
+        serializer = CreateUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            AuthToken.objects.create(user)
+            user_db = User.objects.get(username = request.data["username"])
+            user_profile = Profile.objects.get(user_pk=user_db.pk)
+            user_profile.phone = request.data['phone']
+            user_profile.is_individual = is_individual
+            user_profile.display_name = request.data['display_name']
+            user_profile.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 class LoginAPI(generics.GenericAPIView):
