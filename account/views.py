@@ -19,21 +19,19 @@ nlp_result = []
 
 
 # 소켓 통신을 위한 함수
-def recv_data(client):
+def recv_data(client, data):
+    print(">> Connected with nlp")
+    request_data = json.dumps(data)
+    message = bytes(request_data, 'utf-8')
+    client.send(message)
     while True:
         data = client.recv(1024)
         received_data = data.decode('utf-8')
         received_data = json.loads(received_data)
-        print("received_data")
-        print(received_data)
-        nlp_result.append(received_data)
-
-
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((HOST, PORT))
-
-start_new_thread(recv_data, (client_socket,))
-print(">> Connected with nlp")
+        if received_data != "":
+            print("received_data :", received_data)
+            nlp_result.append(received_data)
+            break
 
 
 # Create your views here.
@@ -112,12 +110,13 @@ class ProfileRoadmapAPIView(APIView):
 
     def get(self, request):
         user_pk = request.GET.get('user_pk', 1)
-        # profile = self.get_user(user_pk)
         print(user_pk)
-        request_data = json.dumps(request.data)
-        message = bytes(request_data, 'utf-8')
-        client_socket.send(message)
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect((HOST, PORT))
+        start_new_thread(recv_data, (client_socket, request.data))
+
         while len(nlp_result) == 0:
             continue
         return_data = nlp_result.pop()
+        client_socket.close()
         return Response(return_data, status=status.HTTP_200_OK)
