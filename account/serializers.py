@@ -55,3 +55,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(1)
         return Profile.objects.create(validated_data)
+
+
+class RoadmapSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = '__all__'

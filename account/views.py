@@ -8,6 +8,33 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
 
+import socket
+from _thread import *
+import json
+
+HOST = '127.0.0.1'
+PORT = 9999
+
+nlp_result = []
+
+
+# 소켓 통신을 위한 함수
+def recv_data(client):
+    while True:
+        data = client.recv(1024)
+        received_data = data.decode('utf-8')
+        received_data = json.loads(received_data)
+        print("received_data")
+        print(received_data)
+        nlp_result.append(received_data)
+
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((HOST, PORT))
+
+start_new_thread(recv_data, (client_socket,))
+print(">> Connected with nlp")
+
 
 # Create your views here.
 class RegistrationAPIView(APIView):
@@ -21,7 +48,7 @@ class RegistrationAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             AuthToken.objects.create(user)
-            user_db = User.objects.get(username = request.data["username"])
+            user_db = User.objects.get(username=request.data["username"])
             user_profile = Profile.objects.get(user_pk=user_db.pk)
             user_profile.phone = request.data['phone']
             user_profile.is_individual = is_individual
@@ -56,12 +83,6 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
 
 
-# class ProfileUpdateAPI(generics.UpdateAPIView):
-#     lookup_field = "user_pk"
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-
-
 class ProfileDetailAPIView(APIView):
     def get_object(self, user_pk):
         return get_object_or_404(Profile, pk=user_pk-2)
@@ -83,3 +104,20 @@ class ProfileDetailAPIView(APIView):
         profile = self.get_object(user_pk)
         profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ProfileRoadmapAPIView(APIView):
+    def get_user(self, user_pk):
+        return get_object_or_404(Profile, pk=user_pk - 2)
+
+    def get(self, request):
+        user_pk = request.GET.get('user_pk', 1)
+        # profile = self.get_user(user_pk)
+        print(user_pk)
+        request_data = json.dumps(request.data)
+        message = bytes(request_data, 'utf-8')
+        client_socket.send(message)
+        while len(nlp_result) == 0:
+            continue
+        return_data = nlp_result.pop()
+        return Response(return_data, status=status.HTTP_200_OK)
