@@ -7,7 +7,7 @@ class skills(models.Model):
     field = models.CharField(max_length=50, null=False)
 
     def __str__(self):
-        return "id:"+str(self.id)+" name:"+self.name+" field:"+self.field+" base: "+str(self.base)
+        return "id:"+str(self.id)+" name:"+self.name+" field:"+self.field+" base: "+str(self.base.name)
 
 
 class url(models.Model):

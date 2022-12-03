@@ -16,7 +16,8 @@ class Profile(models.Model):
 
 
 class Roadmap(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='roadmap')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_pk = models.IntegerField(blank=True, default=-1)
     field_name = models.CharField(max_length=200, blank=True)
     progress = models.CharField(max_length=200, blank=True)
 
@@ -31,3 +32,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+@receiver(post_save, sender=User)
+def create_user_roadmap(sender, instance, created, **kwargs):
+    if created:
+        Roadmap.objects.create(user=instance, user_pk=instance.id)
+
+
+@receiver(post_save, sender=User)
+def save_user_roadmap(sender, instance, **kwargs):
+    instance.roadmap.save()

@@ -35,10 +35,10 @@ def get_dict(request, field):
     for q in query:
 
         if q.base == None:
-            result[q.name] = {"base":q.field,"child":[]}
+            result[q.name] = {"base": q.field, "child": []}
         else:
             if q.base.name in result.keys():
-                result[q.name] = {"base":q.base.name, "child":[]}
+                result[q.name] = {"base": q.base.name, "child": []}
                 result[q.base.name]["child"].append(q.name)
 
         print(q)

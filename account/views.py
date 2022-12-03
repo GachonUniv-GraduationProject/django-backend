@@ -5,13 +5,16 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Roadmap
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
+from roadmap.models import skills
 
 import socket
 from _thread import *
 import json
 
+# HOST = '211.221.158.44'
+# PORT = 48088
 HOST = '127.0.0.1'
 PORT = 9999
 
@@ -83,7 +86,7 @@ class UserAPI(generics.RetrieveAPIView):
 
 class ProfileDetailAPIView(APIView):
     def get_object(self, user_pk):
-        return get_object_or_404(Profile, pk=user_pk-2)
+        return get_object_or_404(Profile, pk=user_pk - 2)
 
     def get(self, request, user_pk):
         profile = self.get_object(user_pk)
@@ -110,6 +113,9 @@ class ProfileRoadmapAPIView(APIView):
 
     def get(self, request):
         user_pk = request.GET.get('user_pk', 1)
+
+    def post(self, request):
+        user_pk = request.GET.get('user_pk', 1)
         print(user_pk)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((HOST, PORT))
@@ -119,4 +125,20 @@ class ProfileRoadmapAPIView(APIView):
             continue
         return_data = nlp_result.pop()
         client_socket.close()
+        return Response(return_data, status=status.HTTP_200_OK)
+
+    def put(self, request):
+        user_pk = request.GET.get('user_pk', 1)
+        field = request.GET.get('field', "temp")
+        user_roadmap = Roadmap.objects.get(user_pk=user_pk)
+        user_roadmap.field_name = field
+        roadmap_skills = skills.objects.filter(field=field)
+        children = roadmap_skills[0].child.all()
+        child = children[0].child.all()[0].name
+        user_roadmap.progress = child
+        print(child)
+        # for child in children:
+        #     print(child.name)
+        user_roadmap.save()
+        return_data = {"user_pk": user_pk, "field": field, "progress": child}
         return Response(return_data, status=status.HTTP_200_OK)
