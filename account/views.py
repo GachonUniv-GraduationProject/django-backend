@@ -117,6 +117,8 @@ class ProfileRoadmapAPIView(APIView):
         roadmap_field = user_roadmap.field_name
         roadmap_data = skills.objects.filter(field=roadmap_field)
         return_data = {"skill": []}
+        completed = True
+        locked = False
         for data in roadmap_data:
             temp_data = {}
             if data.base is None:
@@ -126,13 +128,17 @@ class ProfileRoadmapAPIView(APIView):
                 temp_data["base"] = data.base.name
             temp_data["name"] = data.name
             temp_data["child"] = []
+            temp_data["level"] = data.level
             for child in data.child.all():
                 temp_data["child"].append(child.name)
+            temp_data["completed"] = completed
+            temp_data["locked"] = locked
+            if data.name == user_roadmap.progress:
+                completed = False
+                locked = True
             return_data['skill'].append(temp_data)
 
-
         return Response(return_data, status=status.HTTP_200_OK)
-
 
     def post(self, request):
         user_pk = request.GET.get('user_pk', 1)
@@ -150,15 +156,19 @@ class ProfileRoadmapAPIView(APIView):
     def put(self, request):
         user_pk = request.GET.get('user_pk', 1)
         field = request.GET.get('field', "temp")
+        name = request.data['name']
         user_roadmap = Roadmap.objects.get(user_pk=user_pk)
         user_roadmap.field_name = field
-        roadmap_skills = skills.objects.filter(field=field)
-        children = roadmap_skills[0].child.all()
-        child = children[0].child.all()[0].name
-        user_roadmap.progress = child
-        print(child)
+        if name == field:
+            roadmap_skills = skills.objects.filter(field=field)
+            children = roadmap_skills[0].child.all()
+            child = children[0].child.all()[0].name
+            user_roadmap.progress = child
+            print(child)
+        else:
+            user_roadmap.progress = name
         # for child in children:
         #     print(child.name)
         user_roadmap.save()
-        return_data = {"user_pk": user_pk, "field": field, "progress": child}
+        return_data = {"user_pk": user_pk, "field": field, "progress": user_roadmap.progress}
         return Response(return_data, status=status.HTTP_200_OK)
