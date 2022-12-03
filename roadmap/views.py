@@ -47,6 +47,18 @@ def get_dict(request, field):
     return JsonResponse(result)
 
 
+def update_level(request):
+    query = skills.objects.all()
+    result = {"check": "log"}
+    for q in query:
+        if q.base is None:
+            q.level = 0
+        else:
+            q.level = q.base.level + 1
+        q.save()
+    return JsonResponse(result)
+
+
 def add_roadmap(request):
     data = json.loads(request.body.decode('utf-8'))
     haebin = {"Frontend", "Backend", "Android", "Blockchain"}

@@ -5,6 +5,7 @@ class skills(models.Model):
     name = models.CharField(max_length=100, null=False)
     base = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='child')
     field = models.CharField(max_length=50, null=False)
+    level = models.IntegerField(default=-1)
 
     def __str__(self):
         return "id:"+str(self.id)+" name:"+self.name+" field:"+self.field+" base: "+str(self.base.name)

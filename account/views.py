@@ -113,6 +113,26 @@ class ProfileRoadmapAPIView(APIView):
 
     def get(self, request):
         user_pk = request.GET.get('user_pk', 1)
+        user_roadmap = Roadmap.objects.get(user_pk=user_pk)
+        roadmap_field = user_roadmap.field_name
+        roadmap_data = skills.objects.filter(field=roadmap_field)
+        return_data = {"skill": []}
+        for data in roadmap_data:
+            temp_data = {}
+            if data.base is None:
+                temp_data["base"] = data.field
+
+            else:
+                temp_data["base"] = data.base.name
+            temp_data["name"] = data.name
+            temp_data["child"] = []
+            for child in data.child.all():
+                temp_data["child"].append(child.name)
+            return_data['skill'].append(temp_data)
+
+
+        return Response(return_data, status=status.HTTP_200_OK)
+
 
     def post(self, request):
         user_pk = request.GET.get('user_pk', 1)
