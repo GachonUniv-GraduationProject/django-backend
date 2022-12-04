@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework import urls
-from .views import SkillViewSet, UrlViewSet
+from .views import *
 
 skill_list = SkillViewSet.as_view({
     'get': 'list',

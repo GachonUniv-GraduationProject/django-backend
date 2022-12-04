@@ -1,6 +1,6 @@
 from django.urls import path
 from crawling import views
-from .views import DataViewSet, KeywordViewSet
+from .views import *
 
 # 목록 보여주기
 data_list = DataViewSet.as_view({

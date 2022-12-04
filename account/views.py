@@ -172,3 +172,41 @@ class ProfileRoadmapAPIView(APIView):
         user_roadmap.save()
         return_data = {"user_pk": user_pk, "field": field, "progress": user_roadmap.progress}
         return Response(return_data, status=status.HTTP_200_OK)
+
+
+class ProfileCapabilityAPIView(APIView):
+    def get_user(self, user_pk):
+        return get_object_or_404(Profile, pk=user_pk - 2)
+
+    def get(self, request):
+        user_pk = request.GET.get('user_pk', 1)
+        user_roadmap = Roadmap.objects.get(user_pk=user_pk)
+        roadmap_field = user_roadmap.field_name
+        cur_progress = user_roadmap.progress
+        fields = request.data['fields']
+        completed = []
+        return_data = {"capability": []}
+        main_field = skills.objects.filter(field=roadmap_field)
+        locked = False
+        for skill in main_field:
+            if not locked:
+                completed.append(skill.name)
+            if skill.name == cur_progress:
+                locked = True
+        return_data['capability'].append({
+            "name": roadmap_field,
+            "total_curriculum": len(main_field),
+            "completed": len(completed)})
+        for field in fields:
+            temp_field = skills.objects.filter(field=field)
+            temp_completed = 0
+            for skill in temp_field:
+                if skill.name in completed:
+                    temp_completed += 1
+            return_data['capability'].append({
+                "name": field,
+                "total_curriculum": len(temp_field),
+                "completed": temp_completed
+            })
+
+        return Response(return_data, status=status.HTTP_200_OK)
