@@ -262,7 +262,7 @@ class CompanyAPIView(APIView):
             print(user)
             temp_data = {'user_id': str(user.pk), 'field': user.field_name, 'skill': []}
             for data in roadmap_data:
-                if data.name is not user.progress:
+                if data.name != user.progress:
                     if data.name in fields[field]["기술"] \
                             or data.name in fields[field]["프레임워크"] \
                             or data.name in fields[field]["기타"]:
