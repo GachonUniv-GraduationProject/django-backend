@@ -68,12 +68,13 @@ class RegistrationAPIView(APIView):
             AuthToken.objects.create(user)
             user_db = User.objects.get(username=request.data["username"])
             if is_individual == 'True':
-                # experience 생성하는코드 추가해야함
+
                 user_profile = Profile.objects.get(user_pk=user_db.pk)
                 user_profile.phone = request.data['phone']
                 user_profile.is_individual = is_individual
                 user_profile.display_name = request.data['display_name']
                 user_profile.save()
+
                 return Response(serializer.data, status=201)
             else:
                 company_profile = Company.objects.create(user=user_db,
@@ -167,6 +168,7 @@ class ProfileRoadmapAPIView(APIView):
 
     def post(self, request):
         user_pk = request.GET.get('user_pk', 1)
+        user_db = User.objects.get(pk=user_pk)
         print(user_pk)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((HOST, NLP_PORT))
@@ -176,6 +178,20 @@ class ProfileRoadmapAPIView(APIView):
             continue
         return_data = nlp_result.pop()
         client_socket.close()
+        if request.data["type"] == "NLP_POS_NEG":
+            for data in return_data["classify"]:
+                user_field = Field.objects.create(user=user_db, user_pk=user_pk)
+                user_field.name = data['field']
+                user_field.preference = data['value']
+                user_field.save()
+            print(return_data)
+        else:
+            for data in return_data["classify"]:
+                user_experience = Experience.objects.create(user=user_db,user_pk=user_pk)
+                user_experience.field = data['field']
+                user_experience.detail = data['sentence']
+                user_experience.save()
+            print(return_data)
         return Response(return_data, status=status.HTTP_200_OK)
 
     def put(self, request):
