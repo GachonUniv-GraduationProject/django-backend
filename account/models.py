@@ -13,6 +13,15 @@ class Profile(models.Model):
     display_name = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=200, blank=True)
     is_individual = models.BooleanField(default=True)
+    open_to_company = models.BooleanField(default=True)
+
+
+class Experience(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_pk = models.IntegerField(default=0)
+    field = models.CharField(max_length=200)
+    preference = models.IntegerField()
+    detail = models.CharField(max_length=500)
 
 
 class Roadmap(models.Model):
@@ -49,3 +58,4 @@ def create_user_roadmap(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_roadmap(sender, instance, **kwargs):
     instance.roadmap.save()
+

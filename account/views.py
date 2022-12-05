@@ -68,6 +68,7 @@ class RegistrationAPIView(APIView):
             AuthToken.objects.create(user)
             user_db = User.objects.get(username=request.data["username"])
             if is_individual == 'True':
+                # experience 생성하는코드 추가해야함
                 user_profile = Profile.objects.get(user_pk=user_db.pk)
                 user_profile.phone = request.data['phone']
                 user_profile.is_individual = is_individual
@@ -280,3 +281,11 @@ class CompanyAPIView(APIView):
         return_data = company_matching.pop()
         client_socket.close()
         return Response(return_data, status=status.HTTP_200_OK)
+
+
+class MyPageAPIView(APIView):
+    def get(self, request):
+        user_pk = request.GET.get("user_pk", 1)
+        user_experience = Experience.objects.filter(user_pk=user_pk)
+
+        return Response({"user_pk": user_pk}, status=status.HTTP_200_OK)

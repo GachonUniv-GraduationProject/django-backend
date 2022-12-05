@@ -9,5 +9,7 @@ urlpatterns = [
     path("profile/roadmap", ProfileRoadmapAPIView.as_view()),
     path("profile/capability", ProfileCapabilityAPIView.as_view()),
     path("company/survey", CompanyAPIView.as_view()),
+    path("profile/mypage", MyPageAPIView.as_view())
+
     # path('tech/', views.TechView.as_view(), name="tech")
 ]
