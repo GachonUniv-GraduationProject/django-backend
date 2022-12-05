@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.models import User
-from .models import Profile, Roadmap
+from .models import *
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
 from roadmap.models import skills
 
@@ -19,6 +19,7 @@ HOST = '127.0.0.1'
 PORT = 9999
 
 nlp_result = []
+company_matching = []
 
 
 # 소켓 통신을 위한 함수
@@ -41,21 +42,28 @@ def recv_data(client, data):
 class RegistrationAPIView(APIView):
     def post(self, request):
         is_individual = request.GET.get('is_individual', True)
-        print(request.GET.get('is_individual', False))
         if len(request.data["username"]) < 6 or len(request.data["password"]) < 4:
             body = {"message": "short field"}
             return Response(body, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = CreateUserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             AuthToken.objects.create(user)
             user_db = User.objects.get(username=request.data["username"])
-            user_profile = Profile.objects.get(user_pk=user_db.pk)
-            user_profile.phone = request.data['phone']
-            user_profile.is_individual = is_individual
-            user_profile.display_name = request.data['display_name']
-            user_profile.save()
-            return Response(serializer.data, status=201)
+            if is_individual == 'True':
+                user_profile = Profile.objects.get(user_pk=user_db.pk)
+                user_profile.phone = request.data['phone']
+                user_profile.is_individual = is_individual
+                user_profile.display_name = request.data['display_name']
+                user_profile.save()
+                return Response(serializer.data, status=201)
+            else:
+                company_profile = Company.objects.create(user=user_db,
+                                                         user_pk=user_db.pk,
+                                                         company_name=request.data['company_name'])
+                company_profile.save()
+                return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
 
@@ -210,3 +218,21 @@ class ProfileCapabilityAPIView(APIView):
             })
 
         return Response(return_data, status=status.HTTP_200_OK)
+
+
+class CompanyAPIView(APIView):
+    # json 파일 여는 함수
+    def load_json(self):
+        fields = []
+        with open('data/Backend_skill.json', 'r') as json_file:
+            fields.append(json.load(json_file))
+
+        with open('data/Frontend_skill.json', 'r') as json_file:
+            fields.append(json.load(json_file))
+
+        return fields
+
+    def get(self, request):
+        fields = self.load_json()
+        users = Roadmap.objects.filter(field_name=request.data['field'])
+        return Response(fields, status=status.HTTP_200_OK)

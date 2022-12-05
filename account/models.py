@@ -22,6 +22,13 @@ class Roadmap(models.Model):
     progress = models.CharField(max_length=200, blank=True)
 
 
+class Company(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_pk = models.IntegerField(blank=True, default=-1)
+    company_name = models.CharField(max_length=200, blank=True)
+    recommend_users = models.ManyToManyField(Profile)
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
