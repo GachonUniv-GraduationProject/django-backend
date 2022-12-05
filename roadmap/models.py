@@ -8,7 +8,7 @@ class skills(models.Model):
     level = models.IntegerField(default=-1)
 
     def __str__(self):
-        return "id:"+str(self.id)+" name:"+self.name+" field:"+self.field+" base: "+str(self.base.name)
+        return "id:"+str(self.id)+" name:"+self.name+" field:"+self.field
 
 
 class url(models.Model):

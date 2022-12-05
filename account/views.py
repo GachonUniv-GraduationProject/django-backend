@@ -16,14 +16,15 @@ import json
 # HOST = '211.221.158.44'
 # PORT = 48088
 HOST = '127.0.0.1'
-PORT = 9999
+NLP_PORT = 9999
+COMPANY_PORT = 9898
 
 nlp_result = []
 company_matching = []
 
 
 # 소켓 통신을 위한 함수
-def recv_data(client, data):
+def nlp_recv_data(client, data):
     print(">> Connected with nlp")
     request_data = json.dumps(data)
     message = bytes(request_data, 'utf-8')
@@ -35,6 +36,21 @@ def recv_data(client, data):
         if received_data != "":
             print("received_data :", received_data)
             nlp_result.append(received_data)
+            break
+
+
+def company_recv_data(client, data):
+    print(">> Connected with company")
+    request_data = json.dumps(data)
+    message = bytes(request_data, 'utf-8')
+    client.send(message)
+    while True:
+        data = client.recv(10000)
+        received_data = data.decode('utf-8')
+        received_data = json.loads(received_data)
+        if received_data != "":
+            print("received_data :", received_data)
+            company_matching.append(received_data)
             break
 
 
@@ -152,8 +168,8 @@ class ProfileRoadmapAPIView(APIView):
         user_pk = request.GET.get('user_pk', 1)
         print(user_pk)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((HOST, PORT))
-        start_new_thread(recv_data, (client_socket, request.data))
+        client_socket.connect((HOST, NLP_PORT))
+        start_new_thread(nlp_recv_data, (client_socket, request.data))
 
         while len(nlp_result) == 0:
             continue
@@ -223,16 +239,44 @@ class ProfileCapabilityAPIView(APIView):
 class CompanyAPIView(APIView):
     # json 파일 여는 함수
     def load_json(self):
-        fields = []
-        with open('data/Backend_skill.json', 'r') as json_file:
-            fields.append(json.load(json_file))
+        fields = {}
+        with open('account/data/Backend_skill.json') as json_file:
+            fields["Backend"] = json.load(json_file)["Backend"]
 
-        with open('data/Frontend_skill.json', 'r') as json_file:
-            fields.append(json.load(json_file))
+        with open('account/data/Frontend_skill.json') as json_file:
+            fields["Frontend"] = json.load(json_file)["Frontend"]
 
         return fields
 
     def get(self, request):
         fields = self.load_json()
-        users = Roadmap.objects.filter(field_name=request.data['field'])
-        return Response(fields, status=status.HTTP_200_OK)
+        # print(fields)
+        field = request.data["data"]["company"]['field']
+        company = Company.objects.get(user_pk=request.data["data"]["company"]['company_id'])
+        users = Roadmap.objects.filter(field_name=field)
+        roadmap_data = skills.objects.filter(field=field)
+        to_socket = request.data
+
+        to_socket['data']['user'] = []
+        for user in users:
+            print(user)
+            temp_data = {'user_id': str(user.pk), 'field': user.field_name, 'skill': []}
+            for data in roadmap_data:
+                if data.name is not user.progress:
+                    if data.name in fields[field]["기술"] \
+                            or data.name in fields[field]["프레임워크"] \
+                            or data.name in fields[field]["기타"]:
+                        temp_data['skill'].append(data.name)
+                else:
+                    break
+            to_socket['data']['user'].append(temp_data)
+        print(to_socket)
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect((HOST, COMPANY_PORT))
+        start_new_thread(company_recv_data, (client_socket, to_socket))
+
+        while len(company_matching) == 0:
+            continue
+        return_data = company_matching.pop()
+        client_socket.close()
+        return Response(return_data, status=status.HTTP_200_OK)
