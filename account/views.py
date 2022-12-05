@@ -15,8 +15,9 @@ import json
 
 # HOST = '211.221.158.44'
 # PORT = 48088
-HOST = '127.0.0.1'
-NLP_PORT = 9999
+NLP_HOST = '211.221.158.44'
+COMPANY_HOST = '127.0.0.1'
+NLP_PORT = 48088
 COMPANY_PORT = 9898
 
 nlp_result = []
@@ -171,7 +172,7 @@ class ProfileRoadmapAPIView(APIView):
         user_db = User.objects.get(pk=user_pk)
         print(user_pk)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((HOST, NLP_PORT))
+        client_socket.connect((NLP_HOST, NLP_PORT))
         start_new_thread(nlp_recv_data, (client_socket, request.data))
 
         while len(nlp_result) == 0:
@@ -187,7 +188,7 @@ class ProfileRoadmapAPIView(APIView):
             print(return_data)
         else:
             for data in return_data["classify"]:
-                user_experience = Experience.objects.create(user=user_db,user_pk=user_pk)
+                user_experience = Experience.objects.create(user=user_db, user_pk=user_pk)
                 user_experience.field = data['field']
                 user_experience.detail = data['sentence']
                 user_experience.save()
@@ -289,7 +290,7 @@ class CompanyAPIView(APIView):
             to_socket['data']['user'].append(temp_data)
         print(to_socket)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((HOST, COMPANY_PORT))
+        client_socket.connect((COMPANY_HOST, COMPANY_PORT))
         start_new_thread(company_recv_data, (client_socket, to_socket))
 
         while len(company_matching) == 0:
@@ -302,6 +303,14 @@ class CompanyAPIView(APIView):
 class MyPageAPIView(APIView):
     def get(self, request):
         user_pk = request.GET.get("user_pk", 1)
+        return_data = {"experience": [], "preference": []}
         user_experience = Experience.objects.filter(user_pk=user_pk)
+        user_preference = Field.objects.filter(user_pk=user_pk)
+        for experience in user_experience:
+            temp = {"field": experience.field, "detail": experience.detail}
+            return_data["experience"].append(temp)
+        for field in user_preference:
+            temp = {"field":field.name, "preference": field.preference}
+            return_data["preference"].append(temp)
 
-        return Response({"user_pk": user_pk}, status=status.HTTP_200_OK)
+        return Response(return_data, status=status.HTTP_200_OK)
