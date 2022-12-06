@@ -13,14 +13,14 @@ import socket
 from _thread import *
 import json
 
-NLP_HOST = "127.0.0.1"
-COMPANY_HOST = "127.0.0.1"
-NLP_PORT = 9999
-COMPANY_PORT = 9898
-# NLP_HOST = '211.221.158.44'
-# COMPANY_HOST = '127.0.0.1'
-# NLP_PORT = 48088
+# NLP_HOST = "127.0.0.1"
+# COMPANY_HOST = "127.0.0.1"
+# NLP_PORT = 9999
 # COMPANY_PORT = 9898
+NLP_HOST = '211.221.158.44'
+COMPANY_HOST = '127.0.0.1'
+NLP_PORT = 48088
+COMPANY_PORT = 9898
 
 nlp_result = []
 company_matching = []
