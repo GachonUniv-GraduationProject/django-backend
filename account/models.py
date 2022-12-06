@@ -26,22 +26,28 @@ class Experience(models.Model):
 class Field(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     user_pk = models.IntegerField(default=0)
-    name = models.CharField(max_length=200, blank=True,null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
     preference = models.IntegerField(blank=True, null=True)
 
 
 class Roadmap(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_pk = models.IntegerField(blank=True, default=-1)
-    field_name = models.CharField(max_length=200, blank=True,null=True)
-    progress = models.CharField(max_length=200, blank=True,null=True)
+    field_name = models.CharField(max_length=200, blank=True, null=True)
+    progress = models.CharField(max_length=200, blank=True, null=True)
 
 
 class Company(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_pk = models.IntegerField(blank=True, default=-1)
     company_name = models.CharField(max_length=200, blank=True)
-    recommend_users = models.ManyToManyField(Profile)
+
+
+class RecommendProfile(models.Model):
+    user_pk = models.IntegerField()
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    match_ratio = models.FloatField()
+    skills = models.CharField(max_length=1000, default="")
 
 
 @receiver(post_save, sender=User)
@@ -64,4 +70,3 @@ def create_user_roadmap(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_roadmap(sender, instance, **kwargs):
     instance.roadmap.save()
-

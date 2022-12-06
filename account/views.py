@@ -13,12 +13,14 @@ import socket
 from _thread import *
 import json
 
-# HOST = '211.221.158.44'
-# PORT = 48088
-NLP_HOST = '211.221.158.44'
-COMPANY_HOST = '127.0.0.1'
-NLP_PORT = 48088
+NLP_HOST = "127.0.0.1"
+COMPANY_HOST = "127.0.0.1"
+NLP_PORT = 9999
 COMPANY_PORT = 9898
+# NLP_HOST = '211.221.158.44'
+# COMPANY_HOST = '127.0.0.1'
+# NLP_PORT = 48088
+# COMPANY_PORT = 9898
 
 nlp_result = []
 company_matching = []
@@ -266,7 +268,7 @@ class CompanyAPIView(APIView):
 
         return fields
 
-    def get(self, request):
+    def post(self, request):
         fields = self.load_json()
         # print(fields)
         field = request.data["data"]["company"]['field']
@@ -297,6 +299,16 @@ class CompanyAPIView(APIView):
             continue
         return_data = company_matching.pop()
         client_socket.close()
+        for user in return_data["recommended_user"]:
+            recommend_user = RecommendProfile.objects.create(
+                company=company,
+                user_pk=user["user_id"],
+                match_ratio=user["match_ratio"])
+            user_skill = ""
+            for skill in user["skill"]:
+                user_skill += skill + ","
+            recommend_user.skills = user_skill
+            recommend_user.save()
         return Response(return_data, status=status.HTTP_200_OK)
 
 
@@ -310,7 +322,24 @@ class MyPageAPIView(APIView):
             temp = {"field": experience.field, "detail": experience.detail}
             return_data["experience"].append(temp)
         for field in user_preference:
-            temp = {"field":field.name, "preference": field.preference}
+            temp = {"field": field.name, "preference": field.preference}
             return_data["preference"].append(temp)
 
+        return Response(return_data, status=status.HTTP_200_OK)
+
+
+class CompanyRecommendationAPIView(APIView):
+
+    def get(self, request):
+        company_id = request.GET.get("company_id")
+        company = Company.objects.get(user_pk=company_id)
+        recommend_users = RecommendProfile.objects.filter(company=company)
+        return_data = {"recommended_user": []}
+        for user in recommend_users:
+            temp = {"user_id": user.pk, "match_ratio": user.match_ratio}
+            return_data["recommended_user"].append(temp)
+            user_skills = user.skills.split(",")
+            user_skills.pop()
+            temp["skill"] = user_skills
+            print(user_skills)
         return Response(return_data, status=status.HTTP_200_OK)
