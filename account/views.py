@@ -151,28 +151,38 @@ class ProfileRoadmapAPIView(APIView):
         return_data = {"skill": []}
         completed = True
         locked = False
-        lock_level = 0
-        lock = False
+        check_level = 0
+        now_lock = False
+        now_uncomplete = False
+
         for data in roadmap_data:
             temp_data = {}
             if data.base is None:
                 temp_data["base"] = data.field
-
             else:
                 temp_data["base"] = data.base.name
             temp_data["name"] = data.name
-            temp_data["child"] = []
             temp_data["level"] = data.level
+            temp_data["child"] = []
             for child in data.child.all():
                 temp_data["child"].append(child.name)
+            if data.name == user_roadmap.progress:
+                check_level = data.level
+                now_uncomplete = True
+                completed = False
+
             temp_data["completed"] = completed
             temp_data["locked"] = locked
-            if data.name == user_roadmap.progress:
-                lock_level = data.level
-                lock = True
-                completed = False
-            if lock and data.level == 1:
+            if now_lock and data.level == 1:
                 locked = True
+            if now_uncomplete and data.level == 1:
+                now_lock = True
+            # if data.name == user_roadmap.progress:
+            #     lock_level = data.level
+            #     lock = True
+            #     completed = False
+            # if lock and data.level == 1:
+            #     locked = True
             return_data['skill'].append(temp_data)
 
         return Response(return_data, status=status.HTTP_200_OK)
