@@ -103,7 +103,7 @@ class LoginAPI(generics.GenericAPIView):
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
                 "roadmap": roadmap.field_name,
-                "open_to_company":True
+                "open_to_company": True
             }
         )
 
@@ -288,7 +288,7 @@ class CompanyAPIView(APIView):
         to_socket['data']['user'] = []
         for user in users:
             print(user)
-            temp_data = {'user_id': str(user.pk), 'field': user.field_name, 'skill': []}
+            temp_data = {'user_id': str(user.user_pk), 'field': user.field_name, 'skill': []}
             for data in roadmap_data:
                 if data.name != user.progress:
                     if data.name in fields[field]["기술"] \
@@ -344,7 +344,13 @@ class CompanyRecommendationAPIView(APIView):
         recommend_users = RecommendProfile.objects.filter(company=company)
         return_data = {"recommended_user": []}
         for user in recommend_users:
-            temp = {"user_id": user.pk, "match_ratio": user.match_ratio}
+            print(user.user_pk)
+            temp_user = User.objects.get(pk=user.user_pk)
+            temp_roadmap = Roadmap.objects.get(user_pk=user.user_pk)
+            temp = {"user_id": user.pk,
+                    "match_ratio": user.match_ratio,
+                    "user_email": temp_user.email,
+                    "field": temp_roadmap.field_name}
             return_data["recommended_user"].append(temp)
             user_skills = user.skills.split(",")
             user_skills.pop()
