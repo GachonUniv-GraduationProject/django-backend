@@ -152,7 +152,6 @@ class ProfileRoadmapAPIView(APIView):
         completed = True
         locked = False
         check_level = 0
-        now_lock = False
         now_uncomplete = False
 
         for data in roadmap_data:
@@ -173,10 +172,9 @@ class ProfileRoadmapAPIView(APIView):
 
             temp_data["completed"] = completed
             temp_data["locked"] = locked
-            if now_lock and data.level == 1:
-                locked = True
+
             if now_uncomplete and data.level == 1:
-                now_lock = True
+                locked = True
             # if data.name == user_roadmap.progress:
             #     lock_level = data.level
             #     lock = True
