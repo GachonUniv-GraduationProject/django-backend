@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import *
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
-from roadmap.models import skills
+from roadmap.models import skills, url
 
 import socket
 from _thread import *
@@ -95,12 +95,14 @@ class LoginAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
+        roadmap = Roadmap.objects.get(user_pk=user.pk)
         return Response(
             {
                 "user": UserSerializer(
                     user, context=self.get_serializer_context()
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
+                "roadmap": roadmap.field_name
             }
         )
 
@@ -347,4 +349,17 @@ class CompanyRecommendationAPIView(APIView):
             user_skills.pop()
             temp["skill"] = user_skills
             print(user_skills)
+        return Response(return_data, status=status.HTTP_200_OK)
+
+
+class RoadmapGetURLAPIView(APIView):
+    def get(self, request):
+        skill = request.GET.get("name")
+        field = request.GET.get("field")
+        request_skill = skills.objects.get(name=skill, field=field)
+        request_urls = url.objects.filter(skill=request_skill)
+        return_data = {"urls": []}
+        for url_ in request_urls:
+            temp_data = {"name": url_.link_name, "link": url_.link}
+            return_data["urls"].append(temp_data)
         return Response(return_data, status=status.HTTP_200_OK)
