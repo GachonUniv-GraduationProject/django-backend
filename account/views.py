@@ -148,6 +148,8 @@ class ProfileRoadmapAPIView(APIView):
         return_data = {"skill": []}
         completed = True
         locked = False
+        lock_level = 0
+        lock = False
         for data in roadmap_data:
             temp_data = {}
             if data.base is None:
@@ -163,7 +165,10 @@ class ProfileRoadmapAPIView(APIView):
             temp_data["completed"] = completed
             temp_data["locked"] = locked
             if data.name == user_roadmap.progress:
+                lock_level = data.level
+                lock = True
                 completed = False
+            if lock and data.level == 1:
                 locked = True
             return_data['skill'].append(temp_data)
 
