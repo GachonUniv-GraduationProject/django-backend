@@ -102,7 +102,8 @@ class LoginAPI(generics.GenericAPIView):
                     user, context=self.get_serializer_context()
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
-                "roadmap": roadmap.field_name
+                "roadmap": roadmap.field_name,
+                "open_to_company":True
             }
         )
 
