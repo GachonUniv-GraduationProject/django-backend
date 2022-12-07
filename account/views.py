@@ -170,11 +170,11 @@ class ProfileRoadmapAPIView(APIView):
                 now_uncomplete = True
                 completed = False
 
-            temp_data["completed"] = completed
-            temp_data["locked"] = locked
-
             if now_uncomplete and data.level == 1:
                 locked = True
+
+            temp_data["completed"] = completed
+            temp_data["locked"] = locked
             # if data.name == user_roadmap.progress:
             #     lock_level = data.level
             #     lock = True
@@ -238,7 +238,7 @@ class ProfileCapabilityAPIView(APIView):
     def get_user(self, user_pk):
         return get_object_or_404(Profile, pk=user_pk - 2)
 
-    def get(self, request):
+    def post(self, request):
         user_pk = request.GET.get('user_pk', 1)
         user_roadmap = Roadmap.objects.get(user_pk=user_pk)
         roadmap_field = user_roadmap.field_name
