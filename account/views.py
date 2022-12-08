@@ -101,33 +101,27 @@ class LoginAPI(generics.GenericAPIView):
         roadmap = Roadmap.objects.get(user_pk=user.pk)
         profile = Profile.objects.get(user_pk=user.pk)
         if profile.is_individual:
-            return Response(
-                {
-                    "user": UserSerializer(
-                        user, context=self.get_serializer_context()
-                    ).data,
-                    "token": AuthToken.objects.create(user)[1],
-                    "field": roadmap.field_name,
-                    "display_name": profile.display_name,
-                    "open_to_company": True,
-                    "is_individual": profile.is_individual
-                }
-            )
+            return_data = {
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                "token": AuthToken.objects.create(user)[1],
+                "field": roadmap.field_name,
+                "open_to_company": True,
+                "is_individual": profile.is_individual}
+            return_data['user']['display_name'] = profile.display_name
+            return Response(return_data, status=status.HTTP_200_OK)
         else:
             company = Company.objects.get(user_pk=user.pk)
-            return Response(
-                {
-                    "user": UserSerializer(
-                        user, context=self.get_serializer_context()
-                    ).data,
-                    "token": AuthToken.objects.create(user)[1],
-                    "field": roadmap.field_name,
-                    "display_name": company.company_name,
-                    "open_to_company": True,
-                    "is_individual": profile.is_individual
-                }
-            )
-
+            return_data = {
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": AuthToken.objects.create(user)[1],
+                "field": roadmap.field_name,
+                "open_to_company": True,
+                "is_individual": profile.is_individual
+            }
+            return_data['user']['display_name'] = company.company_name
+            return Response(return_data, status=status.HTTP_200_OK)
 
 
 class UserAPI(generics.RetrieveAPIView):
