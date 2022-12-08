@@ -102,7 +102,7 @@ class LoginAPI(generics.GenericAPIView):
                     user, context=self.get_serializer_context()
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
-                "roadmap": roadmap.field_name,
+                "field": roadmap.field_name,
                 "open_to_company": True
             }
         )
@@ -223,6 +223,7 @@ class ProfileRoadmapAPIView(APIView):
             for skill in roadmap_skills:
                 if skill.name == user_roadmap.progress:
                     user_roadmap.progress = roadmap_skills[index + 1].name
+                    user_roadmap.save()
                     return Response({"name": user_roadmap.progress})
                 index += 1
         else:
