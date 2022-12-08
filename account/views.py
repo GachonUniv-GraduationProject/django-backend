@@ -80,7 +80,7 @@ class RegistrationAPIView(APIView):
 
                 return Response(serializer.data, status=201)
             else:
-                profile = Profile.objects.name(user_pk=user_db.pk)
+                profile = Profile.objects.get(user_pk=user_db.pk)
                 profile.is_individual = False
                 profile.save()
                 company_profile = Company.objects.create(user=user_db,
