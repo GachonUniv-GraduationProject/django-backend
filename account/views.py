@@ -100,18 +100,34 @@ class LoginAPI(generics.GenericAPIView):
         user = serializer.validated_data
         roadmap = Roadmap.objects.get(user_pk=user.pk)
         profile = Profile.objects.get(user_pk=user.pk)
-        return Response(
-            {
-                "user": UserSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
-                "token": AuthToken.objects.create(user)[1],
-                "field": roadmap.field_name,
-                "display_name": profile.display_name,
-                "open_to_company": True,
-                "is_individual": profile.is_individual
-            }
-        )
+        if profile.is_individual:
+            return Response(
+                {
+                    "user": UserSerializer(
+                        user, context=self.get_serializer_context()
+                    ).data,
+                    "token": AuthToken.objects.create(user)[1],
+                    "field": roadmap.field_name,
+                    "display_name": profile.display_name,
+                    "open_to_company": True,
+                    "is_individual": profile.is_individual
+                }
+            )
+        else:
+            company = Company.objects.get(user_pk=user.pk)
+            return Response(
+                {
+                    "user": UserSerializer(
+                        user, context=self.get_serializer_context()
+                    ).data,
+                    "token": AuthToken.objects.create(user)[1],
+                    "field": roadmap.field_name,
+                    "display_name": company.company_name,
+                    "open_to_company": True,
+                    "is_individual": profile.is_individual
+                }
+            )
+
 
 
 class UserAPI(generics.RetrieveAPIView):
