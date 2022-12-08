@@ -240,7 +240,7 @@ class ProfileRoadmapAPIView(APIView):
                 if skill.name == user_roadmap.progress:
                     user_roadmap.progress = roadmap_skills[index + 1].name
                     user_roadmap.save()
-                    return Response({"name": roadmap_skills[index+1].name})
+                    return Response({"name": roadmap_skills[index].name})
                 index += 1
         else:
             if name == field:
