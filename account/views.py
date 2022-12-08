@@ -368,11 +368,13 @@ class CompanyRecommendationAPIView(APIView):
             temp_user = User.objects.get(pk=user.user_pk)
             temp_profile = Profile.objects.get(user_pk=user.user_pk)
             temp_roadmap = Roadmap.objects.get(user_pk=user.user_pk)
+            user_experience = Experience.objects.get(user_pk=user.user_pk, field=temp_roadmap.field_name)
             temp = {"user_id": user.pk,
                     "match_ratio": user.match_ratio,
                     "name": temp_profile.display_name,
                     "user_email": temp_user.email,
-                    "field": temp_roadmap.field_name}
+                    "field": temp_roadmap.field_name,
+                    "experience":user_experience.detail}
             return_data["recommended_user"].append(temp)
             user_skills = user.skills.split(",")
             user_skills.pop()
