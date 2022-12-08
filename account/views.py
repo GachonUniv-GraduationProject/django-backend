@@ -251,7 +251,7 @@ class ProfileRoadmapAPIView(APIView):
             else:
                 index = 0
                 for skill in roadmap_skills:
-                    if skill.name == user_roadmap.progress:
+                    if skill.name == name:
                         user_roadmap.progress = roadmap_skills[index + 1].name
                         break
                     index += 1
