@@ -279,10 +279,11 @@ class ProfileCapabilityAPIView(APIView):
                 completed.append(skill.name)
             if skill.name == cur_progress:
                 locked = True
-            if locked:
-                return_data['recommend_skills'].append(skill.name)
             if locked and skill.level == 1:
                 break
+            if locked:
+                return_data['recommend_skills'].append(skill.name)
+
         return_data['capability'].append({
             "name": roadmap_field,
             "total_curriculum": len(main_field),
