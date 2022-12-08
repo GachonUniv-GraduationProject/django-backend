@@ -107,6 +107,7 @@ class LoginAPI(generics.GenericAPIView):
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
                 "field": roadmap.field_name,
+                "display_name": profile.display_name,
                 "open_to_company": True,
                 "is_individual": profile.is_individual
             }
