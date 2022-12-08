@@ -80,6 +80,9 @@ class RegistrationAPIView(APIView):
 
                 return Response(serializer.data, status=201)
             else:
+                profile = Profile.objects.name(user_pk=user_db.pk)
+                profile.is_individual = False
+                profile.save()
                 company_profile = Company.objects.create(user=user_db,
                                                          user_pk=user_db.pk,
                                                          company_name=request.data['display_name'])
@@ -96,6 +99,7 @@ class LoginAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         roadmap = Roadmap.objects.get(user_pk=user.pk)
+        profile = Profile.objects.get(user_pk=user.pk)
         return Response(
             {
                 "user": UserSerializer(
@@ -103,7 +107,8 @@ class LoginAPI(generics.GenericAPIView):
                 ).data,
                 "token": AuthToken.objects.create(user)[1],
                 "field": roadmap.field_name,
-                "open_to_company": True
+                "open_to_company": True,
+                "is_individual": profile.is_individual
             }
         )
 
