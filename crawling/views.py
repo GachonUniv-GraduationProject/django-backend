@@ -52,12 +52,17 @@ def get_field(request):
 
 
 def get_trend(request, field):
+    # 분야에 대한 트렌드 객체 긁어옴,
     query_trend = trend.objects.filter(field_name=field)
+    # 분야에 대한 로드맵 정보 긁어옴
     query_roadmap = skills.objects.filter(field=field)
     roadmap_result = {}
+    # 로드맵을 딕셔너리 구조로 만들어 놓는듯??
     for q in query_roadmap:
+        # 부모가 없는 경우
         if q.base is None:
             roadmap_result[q.name] = {"base": q.field, "child": []}
+        # 부모가 있는 경우
         else:
             if q.base.name in roadmap_result.keys():
                 roadmap_result[q.name] = {"base": q.base.name, "child": []}
@@ -65,11 +70,15 @@ def get_trend(request, field):
 
         print(q)
     result = {}
+    # 트렌드에 대해서
     for q in query_trend:
+        # 트렌드랑 연관된 키워드를 긁어옴,
         for kw in q.keywords.all():
+            # 위에서 만든 로드맵 딕셔너리에 키 값에 대해서,
             for roadmap_key in roadmap_result.keys():
                 split_list = roadmap_key.split()
                 for split in split_list:
+                    # 만약 키워드의 이름이 로드맵 이름에 포함된다면,
                     if kw.name in split and len(kw.name) > 1:
                         if roadmap_result[roadmap_key]["base"] in result:
                             if kw.name in result[roadmap_result[roadmap_key]["base"]].keys():
@@ -92,20 +101,28 @@ def test(request):
 
 
 def trend_update(request):
+    # 크롤링 데이터 다 가져옴
     crawling_datas = data.objects.all()
     redun_check = {}
     for crawling_data in crawling_datas:
+        # 크롤링 데이터에서 직군 스트링을 split함
         split_list = crawling_data.position.split()
         print(split_list)
         for field in field_keywords.keys():
             redun_check[field] = False
+        # 직군 split한 것에 대해서
         for word in split_list:
+            # 현재는 field = Frontend, Backend가 끝임
             for field in field_keywords.keys():
+                # Frontend, Backend 내부 키워드랑 겹치는게 있는지 확인
                 for kw in field_keywords[field]:
+                    # 만약 키워드가 직군 split한 것에 있고, 그 분야가 중복되지 않으면,
                     if kw in word and not redun_check[field]:
                         for key in crawling_data.keywords.all():
+                            # 트렌드 객체를 생성,
                             temp_trend = trend.objects.create(field_name=field)
                             temp_read = keyword.objects.filter(name=key.name)
+                            # 키워드와 트렌드 객체 매핑
                             if len(temp_read) == 0:
                                 add_key = keyword.objects.create(name=key.name)
                             else:
@@ -117,7 +134,7 @@ def trend_update(request):
 
     return JsonResponse({"trend": "test"})
 
-
+# 키워드 호출 횟수 업데이트
 def keyword_update(request):
     # TODO: 우선 취업 공고로부터, 키워드들 다 카운트하고, 디비에 그 값 반영해주기, 그 다음 반영된 카운트 값으로 부터 트렌드 나오게 하면 될듯?
     # update 쿼리는 다음 블로그 참고 : https://eunjin3786.tistory.com/337
