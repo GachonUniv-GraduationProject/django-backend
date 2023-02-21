@@ -99,7 +99,7 @@ def get_trend_new(request, field):
         for bunya in result:
             for kw in q.keywords.all():
                 if kw.name in result[bunya]:
-                    result[bunya][kw]["count"] = kw.count
+                    result[bunya][kw.name]["count"] = kw.count
 
     return JsonResponse(result)
 
