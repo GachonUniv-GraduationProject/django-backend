@@ -31,40 +31,40 @@ field_keywords = {
 trend_to_return = {}
 FrontendSkill = {
     "기술": {
-        "HTML",
-        "CSS",
-        "Javascript",
-        "Flutter",
-        "NativeScript",
-        "React Native",
-        "React"
+        "HTML":{},
+        "CSS":{},
+        "Javascript":{},
+        "Flutter":{},
+        "NativeScript":{},
+        "React Native":{},
+        "React":{}
     },
     "프레임워크": {
-        "Electron",
-        "Tauri",
-        "Next.js",
-        "Nuxt.js",
-        "Jest",
-        "Cypress",
-        "Enzyme",
-        "PWA",
-        "Angular",
-        "Vue.js",
-        "Bootstrap",
-        "Bulma",
-        "Tailwind CSS",
-        "Chakra UI",
-        "Material UI",
-        "Radix UI"
+        "Electron":{},
+        "Tauri":{},
+        "Next.js":{},
+        "Nuxt.js":{},
+        "Jest":{},
+        "Cypress":{},
+        "Enzyme":{},
+        "PWA":{},
+        "Angular":{},
+        "Vue.js":{},
+        "Bootstrap":{},
+        "Bulma":{},
+        "Tailwind CSS":{},
+        "Chakra UI":{},
+        "Material UI":{},
+        "Radix UI":{}
     },
     "기타": {
-        "Vuepress",
-        "Jekyll",
-        "Hugo",
-        "Gridsome",
-        "Eleventy",
-        "GatsbyJS",
-        "React Testing Library"
+        "Vuepress":{},
+        "Jekyll":{},
+        "Hugo":{},
+        "Gridsome":{},
+        "Eleventy":{},
+        "GatsbyJS":{},
+        "React Testing Library":{}
     }
 
 }
@@ -101,8 +101,7 @@ def get_trend_new(request, field):
                 if kw in result[bunya]:
                     result[bunya][kw]["count"] = kw.count
 
-
-    return result
+    return JsonResponse(result)
 
 
 def get_trend(request, field):
