@@ -96,8 +96,8 @@ def get_trend_new(request, field):
     query_trend = trend.objects.filter(field_name=field)
     result = trend_to_return[field].copy()
     for q in query_trend:
-        for kw in q.keywords.all():
-            for bunya in result:
+        for bunya in result:
+            for kw in q.keywords.all():
                 if kw in result[bunya]:
                     result[bunya][kw]["count"] = kw.count
 
