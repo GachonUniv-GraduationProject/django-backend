@@ -28,6 +28,47 @@ field_keywords = {
     # "React": ["react", "리엑트"],
     # "Node.js": ["node", "node.js", "노드"]
 }
+trend_to_return = {}
+FrontendSkill = {
+    "기술": {
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Flutter",
+        "NativeScript",
+        "React Native",
+        "React"
+    },
+    "프레임워크": {
+        "Electron",
+        "Tauri",
+        "Next.js",
+        "Nuxt.js",
+        "Jest",
+        "Cypress",
+        "Enzyme",
+        "PWA",
+        "Angular",
+        "Vue.js",
+        "Bootstrap",
+        "Bulma",
+        "Tailwind CSS",
+        "Chakra UI",
+        "Material UI",
+        "Radix UI"
+    },
+    "기타": {
+        "Vuepress",
+        "Jekyll",
+        "Hugo",
+        "Gridsome",
+        "Eleventy",
+        "GatsbyJS",
+        "React Testing Library"
+    }
+
+}
+trend_to_return["Frontend"] = FrontendSkill
 
 
 # Create your views here.
@@ -49,6 +90,19 @@ def get_field(request):
             result["fields"].append(q)
 
     return JsonResponse(result)
+
+
+def get_trend_new(request, field):
+    query_trend = trend.objects.filter(field_name=field)
+    result = trend_to_return[field].copy()
+    for q in query_trend:
+        for kw in q.keywords.all():
+            for bunya in result:
+                if kw in result[bunya]:
+                    result[bunya][kw]["count"] = kw.count
+
+
+    return result
 
 
 def get_trend(request, field):
@@ -133,6 +187,7 @@ def trend_update(request):
                         break
 
     return JsonResponse({"trend": "test"})
+
 
 # 키워드 호출 횟수 업데이트
 def keyword_update(request):
