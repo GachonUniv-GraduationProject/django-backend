@@ -36,7 +36,7 @@ urlpatterns = [
     path('keyword', keyword_list),
     path('keyword/<int:pk>', keyword_detail),
     path('trend', views.get_field),
-    path('trend/<field>', views.get_trend),
+    path('trend/<field>', views.get_trend_new),
     path('trend_update', views.trend_update),
     path('keyword/update', views.keyword_update),
     path('update', views.recruit_json)
