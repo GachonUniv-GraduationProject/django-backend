@@ -31,40 +31,40 @@ field_keywords = {
 trend_to_return = {}
 FrontendSkill = {
     "기술": {
-        "HTML": {},
-        "CSS": {},
-        "Javascript": {},
-        "Flutter": {},
-        "NativeScript": {},
-        "React Native": {},
-        "React": {}
+        "HTML": {"count": 0},
+        "CSS": {"count": 0},
+        "Javascript": {"count": 0},
+        "Flutter": {"count": 0},
+        "NativeScript": {"count": 0},
+        "React Native": {"count": 0},
+        "React": {"count": 0}
     },
     "프레임워크": {
-        "Electron": {},
-        "Tauri": {},
-        "Next.js": {},
-        "Nuxt.js": {},
-        "Jest": {},
-        "Cypress": {},
-        "Enzyme": {},
-        "PWA": {},
-        "Angular": {},
-        "Vue.js": {},
-        "Bootstrap": {},
-        "Bulma": {},
-        "Tailwind CSS": {},
-        "Chakra UI": {},
-        "Material UI": {},
-        "Radix UI": {}
+        "Electron": {"count": 0},
+        "Tauri": {"count": 0},
+        "Next.js": {"count": 0},
+        "Nuxt.js": {"count": 0},
+        "Jest": {"count": 0},
+        "Cypress": {"count": 0},
+        "Enzyme": {"count": 0},
+        "PWA": {"count": 0},
+        "Angular": {"count": 0},
+        "Vue.js": {"count": 0},
+        "Bootstrap": {"count": 0},
+        "Bulma": {"count": 0},
+        "Tailwind CSS": {"count": 0},
+        "Chakra UI": {"count": 0},
+        "Material UI": {"count": 0},
+        "Radix UI": {"count": 0}
     },
     "기타": {
-        "Vuepress": {},
-        "Jekyll": {},
-        "Hugo": {},
-        "Gridsome": {},
-        "Eleventy": {},
-        "GatsbyJS": {},
-        "React Testing Library": {}
+        "Vuepress": {"count": 0},
+        "Jekyll": {"count": 0},
+        "Hugo": {"count": 0},
+        "Gridsome": {"count": 0},
+        "Eleventy": {"count": 0},
+        "GatsbyJS": {"count": 0},
+        "React Testing Library": {"count": 0}
     }
 
 }
