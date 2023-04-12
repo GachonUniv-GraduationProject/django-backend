@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8cce4442-479f-4a25-90ea-69e80b687553" name="Changes" comment="트렌드 업데이트">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/djangoProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/djangoProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2D4q8nGHXmKx4SB6kDkwR6ohgQM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gimdongjun/PycharmProjects/django-backend/account&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/account" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.djangoProject">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="djangoProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="djangoProject" type="Python.DjangoServer" factoryName="Django server">
+      <module name="djangoProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="djangoProject.settings" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../djangoProject/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django Server.djangoProject" />
+      <item itemvalue="Python.manage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.manage" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8cce4442-479f-4a25-90ea-69e80b687553" name="Changes" comment="" />
+      <created>1659968547980</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659968547980</updated>
+      <workItem from="1659968549692" duration="1926000" />
+      <workItem from="1660011641186" duration="102000" />
+      <workItem from="1660464512394" duration="16341000" />
+      <workItem from="1660570570205" duration="3437000" />
+      <workItem from="1660607891117" duration="1179000" />
+      <workItem from="1660623096354" duration="76000" />
+      <workItem from="1660623187790" duration="1359000" />
+      <workItem from="1660628057209" duration="4485000" />
+      <workItem from="1660651742493" duration="405000" />
+      <workItem from="1660710475020" duration="3829000" />
+      <workItem from="1660723207065" duration="389000" />
+      <workItem from="1660808559148" duration="2196000" />
+      <workItem from="1660835344457" duration="73000" />
+      <workItem from="1660835508924" duration="52000" />
+      <workItem from="1660879193046" duration="7193000" />
+      <workItem from="1660897177635" duration="523000" />
+      <workItem from="1660902230143" duration="3141000" />
+      <workItem from="1660951974970" duration="2082000" />
+      <workItem from="1660969411103" duration="7704000" />
+      <workItem from="1661047773717" duration="1351000" />
+      <workItem from="1661080061703" duration="6368000" />
+      <workItem from="1661125260116" duration="5929000" />
+      <workItem from="1661221039475" duration="480000" />
+      <workItem from="1661260413881" duration="1772000" />
+      <workItem from="1661340758581" duration="565000" />
+      <workItem from="1661344429915" duration="184000" />
+      <workItem from="1661344656622" duration="29000" />
+      <workItem from="1661352768349" duration="1783000" />
+      <workItem from="1661399997111" duration="10163000" />
+      <workItem from="1661438389202" duration="2741000" />
+      <workItem from="1661523322900" duration="1998000" />
+      <workItem from="1661618846657" duration="53000" />
+      <workItem from="1661670841729" duration="2090000" />
+      <workItem from="1661686910946" duration="1106000" />
+      <workItem from="1661747048034" duration="7349000" />
+      <workItem from="1661760204463" duration="675000" />
+      <workItem from="1661796679566" duration="602000" />
+      <workItem from="1661825469228" duration="1436000" />
+      <workItem from="1661946895937" duration="689000" />
+      <workItem from="1661948388705" duration="533000" />
+      <workItem from="1662017771564" duration="59000" />
+      <workItem from="1662018213847" duration="14000" />
+      <workItem from="1662033884949" duration="65000" />
+      <workItem from="1662100959910" duration="3218000" />
+      <workItem from="1662350944785" duration="55000" />
+      <workItem from="1663547775797" duration="45000" />
+      <workItem from="1663547878355" duration="2000" />
+      <workItem from="1663548218686" duration="2712000" />
+      <workItem from="1663590393854" duration="3037000" />
+      <workItem from="1663594868401" duration="37000" />
+      <workItem from="1663679604423" duration="5087000" />
+      <workItem from="1663725507028" duration="230000" />
+      <workItem from="1663726362151" duration="517000" />
+      <workItem from="1663737831392" duration="14000" />
+      <workItem from="1666503504127" duration="2571000" />
+      <workItem from="1666511411073" duration="2414000" />
+      <workItem from="1666528883425" duration="7128000" />
+      <workItem from="1666543628998" duration="108000" />
+      <workItem from="1666594284171" duration="1896000" />
+      <workItem from="1666602744686" duration="416000" />
+      <workItem from="1666868066881" duration="1430000" />
+      <workItem from="1667020115085" duration="1319000" />
+      <workItem from="1667035467782" duration="4775000" />
+      <workItem from="1667044626520" duration="565000" />
+      <workItem from="1667099601648" duration="81000" />
+      <workItem from="1667100458015" duration="425000" />
+      <workItem from="1667106729787" duration="4792000" />
+      <workItem from="1667138349234" duration="493000" />
+      <workItem from="1667226693272" duration="2900000" />
+      <workItem from="1667264732491" duration="3020000" />
+      <workItem from="1668916122536" duration="1012000" />
+      <workItem from="1668942262547" duration="1607000" />
+      <workItem from="1669000422693" duration="4469000" />
+      <workItem from="1669017504694" duration="3790000" />
+      <workItem from="1669032435244" duration="7134000" />
+      <workItem from="1669090701563" duration="471000" />
+      <workItem from="1669091985813" duration="423000" />
+      <workItem from="1669093591408" duration="3090000" />
+      <workItem from="1669181970457" duration="4083000" />
+      <workItem from="1669204944328" duration="543000" />
+      <workItem from="1669205683504" duration="1107000" />
+      <workItem from="1669207348614" duration="2013000" />
+      <workItem from="1669210109915" duration="3680000" />
+      <workItem from="1669267555027" duration="21000" />
+      <workItem from="1669268213032" duration="4000" />
+      <workItem from="1669270059271" duration="130000" />
+      <workItem from="1669277306516" duration="2069000" />
+      <workItem from="1669303953165" duration="2448000" />
+      <workItem from="1669308827771" duration="166000" />
+      <workItem from="1669362090450" duration="8000" />
+      <workItem from="1669375171550" duration="5383000" />
+      <workItem from="1669435924549" duration="4786000" />
+      <workItem from="1669442328164" duration="676000" />
+      <workItem from="1669443606642" duration="326000" />
+      <workItem from="1669468482632" duration="6000" />
+      <workItem from="1669471766391" duration="476000" />
+      <workItem from="1669519425742" duration="691000" />
+      <workItem from="1669533294742" duration="62000" />
+      <workItem from="1669534886420" duration="8836000" />
+      <workItem from="1669693253133" duration="4287000" />
+      <workItem from="1669712964141" duration="702000" />
+      <workItem from="1669866551162" duration="106000" />
+      <workItem from="1669866680032" duration="5634000" />
+      <workItem from="1669894297924" duration="3406000" />
+      <workItem from="1669902802536" duration="766000" />
+      <workItem from="1669941386749" duration="101000" />
+      <workItem from="1669941507420" duration="97000" />
+      <workItem from="1669942256253" duration="474000" />
+      <workItem from="1669942771007" duration="2456000" />
+      <workItem from="1669956174266" duration="2162000" />
+      <workItem from="1669965201427" duration="1727000" />
+      <workItem from="1669972385552" duration="2721000" />
+      <workItem from="1669995473145" duration="1297000" />
+      <workItem from="1670062819173" duration="67000" />
+      <workItem from="1670077329469" duration="4455000" />
+      <workItem from="1670082100617" duration="45000" />
+      <workItem from="1670082922717" duration="5487000" />
+      <workItem from="1670117316831" duration="640000" />
+      <workItem from="1670144600768" duration="1126000" />
+      <workItem from="1670172185630" duration="728000" />
+      <workItem from="1670199552927" duration="9909000" />
+      <workItem from="1670217262243" duration="525000" />
+      <workItem from="1670243891557" duration="1231000" />
+      <workItem from="1670255282433" duration="2569000" />
+      <workItem from="1670303597206" duration="1185000" />
+      <workItem from="1670304800765" duration="1944000" />
+      <workItem from="1670311226768" duration="2079000" />
+      <workItem from="1670414172828" duration="7626000" />
+      <workItem from="1670466365568" duration="5682000" />
+      <workItem from="1670475629596" duration="2632000" />
+      <workItem from="1670480714095" duration="28000" />
+      <workItem from="1674121962894" duration="50000" />
+      <workItem from="1674631342324" duration="299000" />
+      <workItem from="1676245385309" duration="1799000" />
+      <workItem from="1676421428315" duration="599000" />
+      <workItem from="1676428853088" duration="3759000" />
+      <workItem from="1676477982228" duration="3000" />
+      <workItem from="1676549794175" duration="598000" />
+      <workItem from="1676954326937" duration="782000" />
+      <workItem from="1676957154523" duration="2373000" />
+      <workItem from="1678288586590" duration="69000" />
+      <workItem from="1681255700718" duration="2139000" />
+      <workItem from="1681257874479" duration="3403000" />
+      <workItem from="1681271789276" duration="2130000" />
+    </task>
+    <task id="LOCAL-00001" summary="crawling update">
+      <created>1662102568861</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662102568861</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor을 위힌 주석추가">
+      <created>1666512329065</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666512329065</updated>
+    </task>
+    <task id="LOCAL-00003" summary="push">
+      <created>1666868438982</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666868438982</updated>
+    </task>
+    <task id="LOCAL-00004" summary="transaction clear &amp; model changing">
+      <created>1667112083375</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667112083375</updated>
+    </task>
+    <task id="LOCAL-00005" summary="토큰을 이용한 회원가입, 로그인 구현, 프로필 업데이트되게 구현해야함">
+      <created>1667230951564</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667230951564</updated>
+    </task>
+    <task id="LOCAL-00006" summary="코드 주석 제거, 토큰을 이용한 로그인 확인, 프로필 업데이트 구현중">
+      <created>1667269461570</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667269461571</updated>
+    </task>
+    <task id="LOCAL-00007" summary="crawling rest 구현">
+      <created>1669021068803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669021068803</updated>
+    </task>
+    <task id="LOCAL-00008" summary="roadmap rest 구현">
+      <created>1669027216790</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669027216790</updated>
+    </task>
+    <task id="LOCAL-00009" summary="트리 구조로 json 리턴 구현">
+      <created>1669047900407</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669047900407</updated>
+    </task>
+    <task id="LOCAL-00010" summary="회원 가입 &amp; 유저 업데이트 구현">
+      <created>1669216108113</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669216108113</updated>
+    </task>
+    <task id="LOCAL-00011" summary="트렌드 업데이트 구현">
+      <created>1669305391597</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669305391597</updated>
+    </task>
+    <task id="LOCAL-00012" summary="트렌드 세팅 TODO: 분야정해야함">
+      <created>1669308985166</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669308985166</updated>
+    </task>
+    <task id="LOCAL-00013" summary="개인 회원가입, 기업 회원가입 구분 구현">
+      <created>1669443912293</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669443912293</updated>
+    </task>
+    <task id="LOCAL-00014" summary="트렌드 리턴 로직 변경(backend, frontend 분야만 리턴 가능)">
+      <created>1669698888556</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669698888556</updated>
+    </task>
+    <task id="LOCAL-00015" summary="회원가입을 위한 시간 딜레이 설정">
+      <created>1669713411497</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1669713411497</updated>
+    </task>
+    <task id="LOCAL-00016" summary="통합 로그인">
+      <created>1669880927892</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1669880927892</updated>
+    </task>
+    <task id="LOCAL-00017" summary="main_nlp와 소켓 통신 연결, 유저쪽 로드맵에 반영되게 추가해야함">
+      <created>1669948152991</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1669948152991</updated>
+    </task>
+    <task id="LOCAL-00018" summary="main_nlp와 소켓 통신 연결(무한루프해결), 유저쪽 로드맵에 반영되게 추가해야함">
+      <created>1669972424872</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1669972424872</updated>
+    </task>
+    <task id="LOCAL-00019" summary="설문에서부터 유저 로드맵 데이터 추가 구현">
+      <created>1670087263316</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670087263316</updated>
+    </task>
+    <task id="LOCAL-00020" summary="로드맵에 레벨 필드 추가">
+      <created>1670089435176</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1670089435176</updated>
+    </task>
+    <task id="LOCAL-00021" summary="로드맵 구현 완료">
+      <created>1670090030847</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1670090030847</updated>
+    </task>
+    <task id="LOCAL-00022" summary="capability 구현 완료">
+      <created>1670145708635</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1670145708636</updated>
+    </task>
+    <task id="LOCAL-00023" summary="기업 유저 매칭 구현 완료">
+      <created>1670209860986</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1670209860986</updated>
+    </task>
+    <task id="LOCAL-00024" summary="마이페이지 구현중">
+      <created>1670258023784</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1670258023784</updated>
+    </task>
+    <task id="LOCAL-00025" summary="마이페이지 구현 완료">
+      <created>1670258491391</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1670258491391</updated>
+    </task>
+    <task id="LOCAL-00026" summary="주석 추가">
+      <created>1676434810194</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1676434810194</updated>
+    </task>
+    <task id="LOCAL-00027" summary="트렌드 업데이트">
+      <created>1676959889081</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1676959889081</updated>
+    </task>
+    <task id="LOCAL-00028" summary="트렌드 업데이트">
+      <created>1676959926012</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1676959926012</updated>
+    </task>
+    <task id="LOCAL-00029" summary="트렌드 업데이트">
+      <created>1676960123098</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1676960123098</updated>
+    </task>
+    <task id="LOCAL-00030" summary="트렌드 업데이트">
+      <created>1676960328324</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1676960328324</updated>
+    </task>
+    <task id="LOCAL-00031" summary="트렌드 업데이트">
+      <created>1676960484889</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1676960484889</updated>
+    </task>
+    <task id="LOCAL-00032" summary="트렌드 업데이트">
+      <created>1676960585594</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1676960585594</updated>
+    </task>
+    <task id="LOCAL-00033" summary="트렌드 업데이트">
+      <created>1676960625849</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1676960625849</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="push" />
+    <MESSAGE value="transaction clear &amp; model changing" />
+    <MESSAGE value="토큰을 이용한 회원가입, 로그인 구현, 프로필 업데이트되게 구현해야함" />
+    <MESSAGE value="코드 주석 제거, 토큰을 이용한 로그인 확인, 프로필 업데이트 구현중" />
+    <MESSAGE value="crawling rest 구현" />
+    <MESSAGE value="roadmap rest 구현" />
+    <MESSAGE value="트리 구조로 json 리턴 구현" />
+    <MESSAGE value="회원 가입 &amp; 유저 업데이트 구현" />
+    <MESSAGE value="트렌드 업데이트 구현" />
+    <MESSAGE value="트렌드 세팅 TODO: 분야정해야함" />
+    <MESSAGE value="개인 회원가입, 기업 회원가입 구분 구현" />
+    <MESSAGE value="트렌드 리턴 로직 변경(backend, frontend 분야만 리턴 가능)" />
+    <MESSAGE value="회원가입을 위한 시간 딜레이 설정" />
+    <MESSAGE value="통합 로그인" />
+    <MESSAGE value="main_nlp와 소켓 통신 연결, 유저쪽 로드맵에 반영되게 추가해야함" />
+    <MESSAGE value="main_nlp와 소켓 통신 연결(무한루프해결), 유저쪽 로드맵에 반영되게 추가해야함" />
+    <MESSAGE value="설문에서부터 유저 로드맵 데이터 추가 구현" />
+    <MESSAGE value="로드맵에 레벨 필드 추가" />
+    <MESSAGE value="로드맵 구현 완료" />
+    <MESSAGE value="capability 구현 완료" />
+    <MESSAGE value="기업 유저 매칭 구현 완료" />
+    <MESSAGE value="마이페이지 구현중" />
+    <MESSAGE value="마이페이지 구현 완료" />
+    <MESSAGE value="주석 추가" />
+    <MESSAGE value="트렌드 업데이트" />
+    <option name="LAST_COMMIT_MESSAGE" value="트렌드 업데이트" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/django_backend$manage.coverage" NAME="manage Coverage Results" MODIFIED="1660630203133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/django_backend$views.coverage" NAME="views Coverage Results" MODIFIED="1660475130246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/devApp" />
+  </component>
+</project>
