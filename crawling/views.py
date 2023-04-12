@@ -6,7 +6,7 @@ from roadmap.models import skills
 from .serializers import dataSerializer, keywordSerializer
 from rest_framework import viewsets
 
-# 취업공고의 position을 보고, 거기서부터 필드명을 추출해야할듯?
+# 분야 확인을 위한 키워드 리스트
 field_keywords = {
     "Frontend": ["front-end", "frontend", "프론트엔드", "웹",
                  "프론트", "리엑트", "react", "vue"],
@@ -29,6 +29,7 @@ field_keywords = {
     # "Node.js": ["node", "node.js", "노드"]
 }
 trend_to_return = {}
+# 트렌드 분석을 위한 자료구조
 FrontendSkill = {
     "기술": {
         "HTML": {"count": 0},
