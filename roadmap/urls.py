@@ -26,19 +26,19 @@ url_detail = UrlViewSet.as_view({
 })
 
 urlpatterns = [
-    # 로드맵 스킬 전체 조회
+    # get roadmap skill list
     path('skill', skill_list),
-    # 로드맵 스킬 단일 조회
+    # get single roadmap skill
     path('skill/<int:pk>', skill_detail),
-    # 로드맵 교육영상 전체 조회
+    # get roadmap education video list
     path('url', url_list),
-    # 로드맵 교육영상 단일 조회
+    # get single roadmap view
     path('url/<int:pk>', url_detail),
-    # 로드맵 트리구조로 조회 API
+    # get roadmap tree
     path('tree', views.get_fields),
-    # 로드맵 분야별 조회
+    # get roadmap field
     path('tree/<field>', views.get_dict),
-    # 사용자 현재 레벨 조회 API
+    # get user current level
     path('level', views.update_level)
     # path('add/', views.add_roadmap)
 
