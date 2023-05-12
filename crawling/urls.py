@@ -2,7 +2,7 @@ from django.urls import path
 from crawling import views
 from .views import *
 
-# 목록 보여주기
+# get list
 data_list = DataViewSet.as_view({
     'get': 'list',
     'post': 'create'
@@ -28,23 +28,23 @@ keyword_detail = KeywordViewSet.as_view({
 
 
 urlpatterns = [
-    # 데이터 조회용 API
+    # get data api
     path('data', data_list),
-    # 싱글 데이터 조회 API
+    # get single data api
     path('data/<int:pk>', data_detail),
-    # 키워드 리스트 조회 API
+    # get keyword list api
     path('keyword', keyword_list),
-    # 싱글 키워드 조회 API
+    # get single keyword api
     path('keyword/<int:pk>', keyword_detail),
-    # 트렌드 분야 조회 API
+    # get trend field api
     path('trend', views.get_field),
-    # 트렌드 분야별 조회 API
+    # get trend per field api
     path('trend/<field>', views.get_trend_new),
-    # 트렌드 업데이트 API
+    # update trend api
     path('trend_update', views.trend_update),
-    # 키워드 업데이트 API
+    # update keyword api
     path('keyword/update', views.keyword_update),
-    # 로드맵 업데이트 API
+    # update roadmap api
     path('update', views.recruit_json)
 
 ]

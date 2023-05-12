@@ -6,7 +6,7 @@ from roadmap.models import skills
 from .serializers import dataSerializer, keywordSerializer
 from rest_framework import viewsets
 
-# 분야 확인을 위한 키워드 리스트
+# keyword list for getting field
 field_keywords = {
     "Frontend": ["front-end", "frontend", "프론트엔드", "웹",
                  "프론트", "리엑트", "react", "vue"],
@@ -29,7 +29,7 @@ field_keywords = {
     # "Node.js": ["node", "node.js", "노드"]
 }
 trend_to_return = {}
-# 트렌드 분석을 위한 자료구조
+# data structure for trend
 FrontendSkill = {
     "기술": {
         "HTML": {"count": 0},
@@ -72,17 +72,19 @@ FrontendSkill = {
 trend_to_return["Frontend"] = FrontendSkill
 
 
-# Create your views here.
+# view for job post datas
 class DataViewSet(viewsets.ModelViewSet):
     queryset = data.objects.all()
     serializer_class = dataSerializer
 
 
+# view for keyword
 class KeywordViewSet(viewsets.ModelViewSet):
     queryset = keyword.objects.all()
     serializer_class = keywordSerializer
 
 
+# view for getting field
 def get_field(request):
     query = trend.objects.values_list('field_name', flat=True)
     result = {"fields": []}
@@ -93,6 +95,7 @@ def get_field(request):
     return JsonResponse(result)
 
 
+# view for updating trend
 def get_trend_new(request, field):
     query_trend = trend.objects.filter(field_name=field)
     result = trend_to_return[field].copy()
@@ -105,6 +108,7 @@ def get_trend_new(request, field):
     return JsonResponse(result)
 
 
+# view for getting trend
 def get_trend(request, field):
     # 분야에 대한 트렌드 객체 긁어옴,
     query_trend = trend.objects.filter(field_name=field)
@@ -154,6 +158,7 @@ def test(request):
     return HttpResponse("<h1>mapped</h1>")
 
 
+# view for updating trend
 def trend_update(request):
     # 크롤링 데이터 다 가져옴
     crawling_datas = data.objects.all()
@@ -189,10 +194,8 @@ def trend_update(request):
     return JsonResponse({"trend": "test"})
 
 
-# 키워드 호출 횟수 업데이트
+# update keyword
 def keyword_update(request):
-    # TODO: 우선 취업 공고로부터, 키워드들 다 카운트하고, 디비에 그 값 반영해주기, 그 다음 반영된 카운트 값으로 부터 트렌드 나오게 하면 될듯?
-    # update 쿼리는 다음 블로그 참고 : https://eunjin3786.tistory.com/337
     keyword_dict = {}
     queryset = data.objects.all()
     for q in queryset:
@@ -211,6 +214,7 @@ def keyword_update(request):
     return JsonResponse({"trend": "test"})
 
 
+# update jobpost data
 def recruit_json(request):
     crawling_data = json.loads(request.body)
     jobs = crawling_data.get('jobPosts')
