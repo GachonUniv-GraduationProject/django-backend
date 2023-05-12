@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from .models import Profile
 
 
-# 회원가입
+# Signup Serializer
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -18,14 +18,14 @@ class CreateUserSerializer(serializers.ModelSerializer):
         return user
 
 
-# 접속 유지중인지 확인
+# User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "username")
 
 
-# 로그인
+# Login Serializer
 class LoginUserSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -36,7 +36,7 @@ class LoginUserSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Unable to log in with provided credentials.")
 
-
+# Profile Serializer
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -56,7 +56,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         print(1)
         return Profile.objects.create(validated_data)
 
-
+# Roadmap Serializer
 class RoadmapSerializer(serializers.ModelSerializer):
 
     class Meta:

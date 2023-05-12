@@ -26,7 +26,7 @@ nlp_result = []
 company_matching = []
 
 
-# 소켓 통신을 위한 함수 - 자연어 처리에 사용
+# function for nlp
 def nlp_recv_data(client, data):
     print(">> Connected with nlp")
     request_data = json.dumps(data)
@@ -42,7 +42,7 @@ def nlp_recv_data(client, data):
             break
 
 
-# 소켓 통신을 위한 함수 - 기업 추천에 사용
+# function for company recommendation
 def company_recv_data(client, data):
     print(">> Connected with company")
     request_data = json.dumps(data)
@@ -58,7 +58,7 @@ def company_recv_data(client, data):
             break
 
 
-# 회원가입 View
+# Signup View
 class RegistrationAPIView(APIView):
     def post(self, request):
         is_individual = request.GET.get('is_individual', True)
@@ -92,7 +92,7 @@ class RegistrationAPIView(APIView):
         return Response(serializer.errors, status=400)
 
 
-# 로그인 View
+# Login View
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginUserSerializer
 
@@ -126,7 +126,7 @@ class LoginAPI(generics.GenericAPIView):
             return Response(return_data, status=status.HTTP_200_OK)
 
 
-# 유저 정보조회 VIEW
+# User Info View
 class UserAPI(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
@@ -135,7 +135,7 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
 
 
-# 유저 프로필 조회 View
+# User Profile View
 class ProfileDetailAPIView(APIView):
     def get_object(self, user_pk):
         return get_object_or_404(Profile, pk=user_pk - 2)
@@ -159,7 +159,7 @@ class ProfileDetailAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# 유저 로드맵 View
+# User Roadmap View
 class ProfileRoadmapAPIView(APIView):
     def get_user(self, user_pk):
         return get_object_or_404(Profile, pk=user_pk - 2)
@@ -265,7 +265,7 @@ class ProfileRoadmapAPIView(APIView):
         return Response(return_data, status=status.HTTP_200_OK)
 
 
-# 유저 capability View
+# User Capability View
 class ProfileCapabilityAPIView(APIView):
     def get_user(self, user_pk):
         return get_object_or_404(Profile, pk=user_pk - 2)
@@ -309,9 +309,8 @@ class ProfileCapabilityAPIView(APIView):
         return Response(return_data, status=status.HTTP_200_OK)
 
 
-# 기업 추천 View
+# Company Recommendtaion View
 class CompanyAPIView(APIView):
-    # json 파일 여는 함수
     def load_json(self):
         fields = {}
         with open('account/data/Backend_skill.json') as json_file:
@@ -366,7 +365,7 @@ class CompanyAPIView(APIView):
         return Response(return_data, status=status.HTTP_200_OK)
 
 
-# MyPage 조회 View
+# MyPage View
 class MyPageAPIView(APIView):
     def get(self, request):
         user_pk = request.GET.get("user_pk", 1)
@@ -383,7 +382,7 @@ class MyPageAPIView(APIView):
         return Response(return_data, status=status.HTTP_200_OK)
 
 
-# 멤버 추천 Api View
+# Company Recommendation View
 class CompanyRecommendationAPIView(APIView):
 
     def get(self, request):
@@ -411,7 +410,8 @@ class CompanyRecommendationAPIView(APIView):
                 print(user_skills)
         return Response(return_data, status=status.HTTP_200_OK)
 
-# 로드맵 Url View
+
+# Roadmap Url View
 class RoadmapGetURLAPIView(APIView):
     def get(self, request):
         skill = request.GET.get("name")
