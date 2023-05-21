@@ -25,7 +25,7 @@ You can run Server using `python3 manage.py runserver`
 [Link to API document](https://documenter.getpostman.com/view/21816249/2s93m1b5QU)
 
 ## Development Environment
-- Python3.9
+- Python : 3.9
 - Databse : MySQL
 - Django : 4.1
 - DjangoRestFramework : 3.13.1
