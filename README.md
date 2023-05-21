@@ -20,5 +20,9 @@ You can run Server using `python3 manage.py runserver`
 ## Database Structure
 <img width="820" alt="image" src="https://github.com/GachonUniv-GraduationProject/django-backend/assets/95599193/a41c8a96-ae9b-4294-b1ca-cdd1ddceafad">
 
+## API Documentation
+
+[Link to API document](https://documenter.getpostman.com/view/21816249/2s93m1b5QU)
+
 ## Development Environment
 - Python3.9
