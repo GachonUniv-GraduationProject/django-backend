@@ -26,3 +26,6 @@ You can run Server using `python3 manage.py runserver`
 
 ## Development Environment
 - Python3.9
+- Databse : MySQL
+- Django : 4.1
+- DjangoRestFramework : 3.13.1
