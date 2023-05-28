@@ -29,3 +29,4 @@ You can run Server using `python3 manage.py runserver`
 - Databse : MySQL
 - Django : 4.1
 - DjangoRestFramework : 3.13.1
+- Other requirements specified in requirements.txt
