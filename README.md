@@ -18,7 +18,8 @@ It is an API server program for project backend.
 You can run Server using `python3 manage.py runserver`
 
 ## Database Structure
-<img width="820" alt="image" src="https://github.com/GachonUniv-GraduationProject/django-backend/assets/95599193/a41c8a96-ae9b-4294-b1ca-cdd1ddceafad">
+<img width="897" alt="image" src="https://github.com/GachonUniv-GraduationProject/django-backend/assets/95599193/81539d20-2aa9-4a5f-b445-fe6e903a64b9">
+
 
 ## API Documentation
 
