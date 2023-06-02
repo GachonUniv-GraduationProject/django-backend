@@ -31,3 +31,6 @@ You can run Server using `python3 manage.py runserver`
 - Django : 4.1
 - DjangoRestFramework : 3.13.1
 - Other requirements specified in requirements.txt
+
+## Visit our wiki for more information
+[Link to Wiki](https://github.com/GachonUniv-GraduationProject/django-backend/wiki)
