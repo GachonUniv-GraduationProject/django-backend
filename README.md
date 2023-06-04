@@ -1,6 +1,8 @@
 # DjangoBackend
 django backend for graduation project
 
+## Members' Information
+
 | Std No. | Name | Department | E-mail | Github |
 |:-------:|:----:|:-------:|:-------:|:-------:|
 |201835417|김동준|AI·소프트웨어학부(소프트웨어전공)|rlaehdwns99@gachon.ac.kr|[Kim-Dong-Jun99](https://github.com/Kim-Dong-Jun99)|
